@@ -1,0 +1,47 @@
+/gazebo_muscle_interface/body/add_brev_l/cmd_activation	大腿向前
+/gazebo_muscle_interface/body/add_long_l/cmd_activation	大腿向前
+/gazebo_muscle_interface/body/add_mag1_l/cmd_activation	大腿向后
+/gazebo_muscle_interface/body/add_mag2_l/cmd_activation 大腿向后
+/gazebo_muscle_interface/body/add_mag3_l/cmd_activation 大腿大幅度向后
+/gazebo_muscle_interface/body/bifemlh_l/cmd_activation  弯小腿至接近90度,膝关节左侧肌肉 +
+/gazebo_muscle_interface/body/bifemsh_l/cmd_activation  弯小腿至接近90度，膝关节右侧肌肉 +
+/gazebo_muscle_interface/body/ercspn_l/cmd_activation   背肌向后拉
+/gazebo_muscle_interface/body/ext_dig_l/cmd_activation  抬脚掌
+/gazebo_muscle_interface/body/ext_hal_l/cmd_activation  抬脚趾？
+/gazebo_muscle_interface/body/extobl_l/cmd_activation   腹肌向前拉
+/gazebo_muscle_interface/body/flex_dig_l/cmd_activation 脚掌向下拉
+/gazebo_muscle_interface/body/flex_hal_l/cmd_activation 脚掌向下拉，连接至大拇指，>0.95不稳定！
+/gazebo_muscle_interface/body/gem_l/cmd_activation      臀内横向肌肉，大腿左右拉动？
+/gazebo_muscle_interface/body/glut_max1_l/cmd_activation 臀部肌肉，向后拉大腿 +
+/gazebo_muscle_interface/body/glut_max2_l/cmd_activation 臀部肌肉，向后拉大腿 +
+/gazebo_muscle_interface/body/glut_max3_l/cmd_activation 臀部肌肉，向后拉大腿 +
+/gazebo_muscle_interface/body/glut_med1_l/cmd_activation 臀部肌肉，向后拉大腿 
+/gazebo_muscle_interface/body/glut_med2_l/cmd_activation 臀部肌肉，向后拉大腿 
+/gazebo_muscle_interface/body/glut_med3_l/cmd_activation 臀部肌肉，向后拉大腿 
+/gazebo_muscle_interface/body/glut_min1_l/cmd_activation 臀内横向肌肉，大腿左右拉动？
+/gazebo_muscle_interface/body/glut_min2_l/cmd_activation 臀内横向肌肉，大腿左右拉动？
+/gazebo_muscle_interface/body/glut_min3_l/cmd_activation 臀内横向肌肉，大腿左右拉动？
+/gazebo_muscle_interface/body/grac_l/cmd_activation      向后拉大腿
+/gazebo_muscle_interface/body/iliacus_l/cmd_activation   向前拉大腿 +
+/gazebo_muscle_interface/body/intobl_l/cmd_activation    向侧后拉躯干
+/gazebo_muscle_interface/body/lat_gas_l/cmd_activation   抬小腿，肌肉连接至脚踝左侧！收缩过快会导致不稳定！ +
+/gazebo_muscle_interface/body/med_gas_l/cmd_activation   抬小腿，肌肉连接至脚踝右侧！收缩过快会导致不稳定！ +
+/gazebo_muscle_interface/body/pect_l/cmd_activation      臀部内侧横向肌肉，轻微向前抬大腿
+/gazebo_muscle_interface/body/per_brev_l/cmd_activation  向下拉脚掌！收缩过快不稳定
+/gazebo_muscle_interface/body/per_long_l/cmd_activation   向下拉脚掌！收缩过快不稳定
+/gazebo_muscle_interface/body/per_tert_l/cmd_activation   向上抬脚掌
+/gazebo_muscle_interface/body/psoas_l/cmd_activation      盆骨内肌肉，向前抬大腿
+/gazebo_muscle_interface/body/quad_fem_l/cmd_activation   臀内横向肌肉，大腿左右拉动？
+/gazebo_muscle_interface/body/rect_fem_l/cmd_activation   向前抬大腿及小腿，肌肉直接连接于小腿骨 +
+/gazebo_muscle_interface/body/sar_l/cmd_activation        大腿横向肌肉，连接于小腿，大小腿左右拉动？
+/gazebo_muscle_interface/body/semimem_l/cmd_activation    向后抬大腿及小腿，肌肉直接连接于小腿骨 +
+/gazebo_muscle_interface/body/semiten_l/cmd_activation    向后抬大腿及小腿，肌肉直接连接于小腿骨 +
+/gazebo_muscle_interface/body/soleus_l/cmd_activation    向下拉脚掌，肌肉连接至脚踝内侧！收缩过快会导致不稳定！ +
+/gazebo_muscle_interface/body/tfl_l/cmd_activation        大腿肌，连接至小腿骨外侧，整体向外前方拉？
+/gazebo_muscle_interface/body/tib_ant_l/cmd_activation    向上抬脚掌，半稳定 +
+/gazebo_muscle_interface/body/tib_post_l/cmd_activation   向下拉脚掌，连接于脚掌下部，过快不稳定!
+/gazebo_muscle_interface/body/vas_int_l/cmd_activation    大腿下部肌，抬小腿 +
+/gazebo_muscle_interface/body/vas_lat_l/cmd_activation    大腿下部肌，向前拉小腿 +
+/gazebo_muscle_interface/body/vas_med_l/cmd_activation    大腿下部肌，向前拉小腿 +
+
+注：不稳定特性左右相同

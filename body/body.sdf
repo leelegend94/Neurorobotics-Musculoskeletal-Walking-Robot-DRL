@@ -1,0 +1,702 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+	<model name="body">
+		<!--<pose frame="ground">0 0 0.25 0 -1.57 0</pose>-->
+		<pose frame="ground">0 0 0.2 0 0 0</pose>
+		<!--============================== Links ====================================-->
+		<link name="pelvis">
+			<!--<pose frame="ground">0.   0.   0.95 0.   0.   0.  </pose>-->
+			<pose frame="body">0.   0.   0.95 0.   0.   0.  </pose>
+			<inertial>
+				<mass>11.777</mass>
+				<pose>-0.0707 -0.      0.      0.      0.      0.    </pose>
+				<inertia>
+					<ixx>0.1028</ixx>
+					<iyy>0.0579</iyy>
+					<izz>0.0871</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_pelvis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/pelvis_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="pelvis-sacrum-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/sacrum.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+			<visual name="pelvis-pelvis-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/pelvis.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+			<visual name="pelvis-l_pelvis-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/l_pelvis.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="femur_r">
+			<pose frame="pelvis">-0.0707 -0.0835  0.8839  0.      0.      0.    </pose>
+			<inertial>
+				<mass>9.3014</mass>
+				<pose> 0.   -0.   -0.17  0.    0.    0.  </pose>
+				<inertia>
+					<ixx>0.1339</ixx>
+					<iyy>0.1412</iyy>
+					<izz>0.0351</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_femur_r">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/femur_r_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="femur_r-femur_r-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/femur_r.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="tibia_r">
+			<pose frame="femur_r">-0.07479826 -0.0835      0.4879988   0.          0.          0.        </pose>
+			<inertial>
+				<mass>3.7075</mass>
+				<pose> 0.     -0.     -0.1867  0.      0.      0.    </pose>
+				<inertia>
+					<ixx>0.0504</ixx>
+					<iyy>0.0511</iyy>
+					<izz>0.0051</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_tibia_r">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/tibia_r_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="tibia_r-tibia_r-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/tibia_r.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+			<collision name="col_fibula_r">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/fibula_r_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="tibia_r-fibula-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/fibula.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="talus_r">
+			<pose frame="tibia_r">-0.07479826 -0.0835      0.0579988   0.          0.          0.        </pose>
+			<inertial>
+				<mass>0.1</mass>
+				<pose> 0. -0.  0.  0.  0.  0.</pose>
+				<inertia>
+					<ixx>0.001</ixx>
+					<iyy>0.001</iyy>
+					<izz>0.002</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<visual name="talus_r-talus-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/talus.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="calcn_r">
+			<pose frame="talus_r">-0.12356826 -0.09142     0.0160488   0.          0.          0.        </pose>
+			<inertial>
+				<mass>1.25</mass>
+				<pose> 0.1  -0.    0.03  0.    0.    0.  </pose>
+				<inertia>
+					<ixx>0.0014</ixx>
+					<iyy>0.0041</iyy>
+					<izz>0.0039</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_calcn_r">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/r_foot_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+				<surface>
+					<contact>
+						<opensim>
+							<stiffness>1.1e10</stiffness>
+						</opensim>
+					</contact>
+				</surface>
+			</collision>
+			<visual name="calcn_r-foot-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/foot.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="toes_r">
+			<pose frame="calcn_r"> 0.05523174 -0.0925      0.0140488   0.          0.          0.        </pose>
+			<inertial>
+				<mass>0.2166</mass>
+				<pose>0.0346 0.0175 0.006  0.     0.     0.    </pose>
+				<inertia>
+					<ixx>0.0001</ixx>
+					<iyy>0.0001</iyy>
+					<izz>0.0002</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_toes_r">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/r_bofoot_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+				<surface>
+					<contact>
+						<opensim>
+							<stiffness>1.1e10</stiffness>
+						</opensim>
+					</contact>
+				</surface>
+			</collision>
+			<visual name="toes_r-bofoot-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/bofoot.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="femur_l">
+			<pose frame="pelvis">-0.0707  0.0835  0.8839  0.      0.      0.    </pose>
+			<inertial>
+				<mass>9.3014</mass>
+				<pose> 0.   -0.   -0.17  0.    0.    0.  </pose>
+				<inertia>
+					<ixx>0.1339</ixx>
+					<iyy>0.1412</iyy>
+					<izz>0.0351</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<!--<collision name="col_femur_l">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/femur_r_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>-->
+			<visual name="femur_l-femur_l-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/femur_l.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="tibia_l">
+			<pose frame="femur_l">-0.07479826  0.0835      0.4879988   0.          0.          0.        </pose>
+			<inertial>
+				<mass>3.7075</mass>
+				<pose> 0.     -0.     -0.1867  0.      0.      0.    </pose>
+				<inertia>
+					<ixx>0.0504</ixx>
+					<iyy>0.0511</iyy>
+					<izz>0.0051</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_tibia_l">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/tibia_l_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="tibia_l-tibia_l-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/tibia_l.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+			<collision name="col_fibula_l">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/l_fibula_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="tibia_l-l_fibula-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/l_fibula.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="talus_l">
+			<pose frame="tibia_l">-0.07479826  0.0835      0.0579988   0.          0.          0.        </pose>
+			<inertial>
+				<mass>0.1</mass>
+				<pose> 0. -0.  0.  0.  0.  0.</pose>
+				<inertia>
+					<ixx>0.001</ixx>
+					<iyy>0.001</iyy>
+					<izz>0.002</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<visual name="talus_l-l_talus-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/l_talus.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="calcn_l">
+			<pose frame="talus_l">-0.12356826  0.09142     0.0160488   0.          0.          0.        </pose>
+			<inertial>
+				<mass>1.25</mass>
+				<pose> 0.1  -0.    0.03  0.    0.    0.  </pose>
+				<inertia>
+					<ixx>0.0014</ixx>
+					<iyy>0.0041</iyy>
+					<izz>0.0039</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_calcn_l">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/l_foot_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+				<surface>
+					<contact>
+						<opensim>
+							<stiffness>1.1e10</stiffness>
+						</opensim>
+					</contact>
+				</surface>
+			</collision>
+			<visual name="calcn_l-l_foot-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/l_foot.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="toes_l">
+			<pose frame="calcn_l">0.05523174 0.0925     0.0140488  0.         0.         0.        </pose>
+			<inertial>
+				<mass>0.2166</mass>
+				<pose> 0.0346 -0.0175  0.006   0.      0.      0.    </pose>
+				<inertia>
+					<ixx>0.0001</ixx>
+					<iyy>0.0001</iyy>
+					<izz>0.0002</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_toes_l">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/l_bofoot_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+				<surface>
+					<contact>
+						<opensim>
+							<stiffness>1.1e10</stiffness>
+						</opensim>
+					</contact>
+				</surface>
+			</collision>
+			<visual name="toes_l-l_bofoot-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/l_bofoot.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<link name="torso">
+			<pose frame="pelvis">-0.1007  0.      1.0315  0.      0.      0.    </pose>
+			<inertial>
+				<mass>34.2366</mass>
+				<pose>-0.03 -0.    0.32  0.    0.    0.  </pose>
+				<inertia>
+					<ixx>1.4745</ixx>
+					<iyy>1.4314</iyy>
+					<izz>0.7555</izz>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyz>0</iyz>
+				</inertia>
+			</inertial>
+			<collision name="col_torso_spine">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/hat_spine_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="torso-hat_spine-vis">
+				<!--<pose>-0.  0.  0.  0. -0.  0.</pose>-->
+				<pose frame="pelvis">0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/hat_spine.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+			<collision name="col_torso_jaw">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/hat_jaw_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="torso-hat_jaw-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/hat_jaw.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+			<collision name="col_torso_skull">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/hat_skull_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+					<!--<box>
+						<size>0.2 0.2 0.2</size>
+					</box>-->
+					
+				</geometry>
+			</collision>
+			<visual name="torso-hat_skull-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/hat_skull.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+			<collision name="col_torso_ribs">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/hat_ribs_col.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</collision>
+			<visual name="torso-hat_ribs-vis">
+				<pose>-0.  0.  0.  0. -0.  0.</pose>
+				<geometry>
+					<mesh>
+						<uri>model://body/meshes/hat_ribs.dae</uri>
+						<scale> 1 1 1</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+		<!--============================== Joints ===================================-->
+		<joint name="ground_pelvis" type="prismatic">
+			<parent>world</parent>
+			<child>pelvis</child>
+			<axis> 
+				<xyz>1 0 1</xyz>
+			</axis>
+		</joint>
+
+		<joint name="hip_r" type="revolute">
+			<parent>pelvis</parent>
+			<child>femur_r</child>
+			
+			<axis> 
+				<xyz>0 1 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				
+				<limit>
+					<lower>-2.6</lower>
+					<upper>1.57</upper>
+				</limit>
+			</axis>
+		
+			<!--
+			<axis> 
+				<xyz>1 0 0</xyz>
+				<dynamics>
+					<friction>1</friction>
+					<damping>1</damping>
+				</dynamics>
+				<limit>
+					<lower>-1</lower>
+					<upper>1</upper>
+				</limit>
+			</axis>
+		-->
+		</joint>
+		<joint name="knee_r" type="revolute">
+			<parent>femur_r</parent>
+			<child>tibia_r</child>
+			<axis> 
+				<xyz>0 1 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				<limit>
+					<lower>-0.1</lower>
+					<upper>2.6</upper>
+				</limit>
+			</axis>
+		</joint>
+		<joint name="ankle_r" type="revolute">
+			<parent>tibia_r</parent>
+			<child>talus_r</child>
+			<axis> 
+				<xyz>0 1 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				<limit>
+					<lower>-0.5236</lower>
+					<upper>0.7854</upper>
+				</limit>
+			</axis>
+		</joint>
+		<joint name="subtalar_r" type="fixed">
+			<parent>talus_r</parent>
+			<child>calcn_r</child>
+		</joint>
+		<joint name="mtp_r" type="fixed">
+			<parent>calcn_r</parent>
+			<child>toes_r</child>
+		</joint>
+		<joint name="hip_l" type="revolute">
+			<parent>pelvis</parent>
+			<child>femur_l</child>
+			<axis> 
+				<xyz>0 1 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				<limit>
+					<lower>-2.6</lower>
+					<upper>1.57</upper>
+				</limit>
+			</axis>
+			<!--
+			<axis2> 
+				<xyz>1 0 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				<limit>
+					<lower>-1.57</lower>
+					<upper>1.57</upper>
+				</limit>
+			</axis2>
+		-->
+		</joint>
+		<joint name="knee_l" type="revolute">
+			<parent>femur_l</parent>
+			<child>tibia_l</child>
+			<axis> 
+				<xyz>0 1 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				<limit>
+					<lower>-0.1</lower>
+					<upper>2.6</upper>
+				</limit>
+			</axis>
+		</joint>
+		<joint name="ankle_l" type="revolute">
+			<parent>tibia_l</parent>
+			<child>talus_l</child>
+			<axis> 
+				<xyz>0 1 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				<limit>
+					<lower>-0.5236</lower>
+					<upper>0.7854</upper>
+				</limit>
+			</axis>
+		</joint>
+		<joint name="subtalar_l" type="fixed">
+			<parent>talus_l</parent>
+			<child>calcn_l</child>
+		</joint>
+		<joint name="mtp_l" type="fixed">
+			<parent>calcn_l</parent>
+			<child>toes_l</child>
+		</joint>
+		<joint name="back" type="fixed">
+			<parent>pelvis</parent>
+			<child>torso</child>
+			<axis> 
+				<xyz>0 1 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				<limit>
+					<lower>-0.5</lower>
+					<upper>3.14</upper>
+				</limit>
+			</axis>
+			<axis2> 
+				<xyz>1 0 0</xyz>
+				<dynamics>
+					<friction>0.01</friction>
+					<damping>0.01</damping>
+				</dynamics>
+				<limit>
+					<lower>-1.57</lower>
+					<upper>1.57</upper>
+				</limit>
+			</axis2>
+		</joint>
+		<!--============================== Muscles ===================================-->
+		<muscles>model://body/body.osim</muscles>
+		<plugin filename="libgazebo_ros_muscle_interface.so" name="muscle_interface_plugin"/>
+		<!--============================== Includes ===============================-->
+	</model>
+</sdf>

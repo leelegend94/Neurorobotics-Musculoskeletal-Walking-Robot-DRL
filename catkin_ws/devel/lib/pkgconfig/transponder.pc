@@ -1,0 +1,8 @@
+prefix=/home/zhenyu/.opt/nrpStorage/template_new_1/catkin_ws/devel
+
+Name: transponder
+Description: Description of transponder
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/zhenyu/.opt/nrpStorage/template_new_1/catkin_ws/devel/lib 
+Requires: 
