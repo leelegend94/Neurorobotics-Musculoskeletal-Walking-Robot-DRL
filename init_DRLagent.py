@@ -23,7 +23,7 @@ def init_DRLagent(t, agent, conf):
         from rl.random import OrnsteinUhlenbeckProcess
 
         from keras import backend as K
-        clientLogger.info('zhuwanwan')
+        clientLogger.info('after')
         K.clear_session()
 
         actor_layers = conf.value.get('DDPG_Agent',{}).get('ActorNet',{}).get('hidden_layers',[[128,'relu'],[128,'relu'],[128,'relu']])
@@ -36,14 +36,11 @@ def init_DRLagent(t, agent, conf):
         random_process = conf.value.get('DDPG_Agent',{}).get('random_process', "OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=.2, size=nA)")
         #agent_args = ",".join(conf.value.get('DDPG_Agent',{}).get('agent',["nb_steps_warmup_critic=10", "nb_steps_warmup_actor=10","gamma=.99", "batch_size=5", "target_model_update=1e-3", "delta_clip=1."]))
         #compile_args = ",".join(conf.value.get('DDPG_Agent',{}).get('compiler',['Adam(lr=.001, clipnorm=1.)','metrics=[\'mae\']']))
-        clientLogger.info("ahaha")
         #agent_args = conf.value.get('DDPG_Agent',{}).get('agent',{'nb_steps_warmup_critic':10, 'nb_steps_warmup_actor':10,'gamma':.99, 'batch_size':5, 'target_model_update':1e-3, 'delta_clip':1.})
         agent_args = conf.value.get('DDPG_Agent',{}).get('agent',{'nb_steps_warmup_critic':10})
-        clientLogger.info("fuyue")
         compiler_args = conf.value.get('DDPG_Agent',{}).get('compiler',{'metrics':['mae']})
-        clientLogger.info("yaoxinyi")
         optimizer = conf.value.get('DDPG_Agent',{}).get('optimizer','Adam(lr=.001, clipnorm=1.)')
-        clientLogger.info("yueyang")
+
 
         nS = 58
         nA = 24
@@ -91,18 +88,15 @@ def init_DRLagent(t, agent, conf):
 
         
         # instanstiate rl agent
-        clientLogger.info("alive?")
         agent.value = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=memory, nb_steps_warmup_critic=10, nb_steps_warmup_actor=10, random_process=random_process, gamma=.99, batch_size=5, target_model_update=1e-3, delta_clip=1.)
         agent_args = {}
         #agent.value = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process), **{'gamma':0.99})
         agent.value.training = True
-        clientLogger.info("WTF????")
         #PATH = '/home/.opt/nrpStorage/template_new_1/ddpg_weights.h5'
         PATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"/home/.opt/nrpStorage/template_new_1/ddpg_weights.h5")
         if os.path.isfile(PATH):
             clientLogger.info('weights loaded!')
             agent.value.load_weights(PATH)
-        clientLogger.info('WTF2!!!!!!')
         #agent.value.compile(Adam(lr=.001, clipnorm=1.), metrics=['mae'])
         agent.value.compile(optimizer=eval(optimizer),**compiler_args)
         clientLogger.info('***********************')
