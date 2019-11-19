@@ -42,7 +42,7 @@ DDPG_Agent:
     nb_steps_warmup_actor: 10
     gamma: .99
     batch_size: 5
-    target_model_update: 1e-3
+    target_model_update: 0.001
     delta_clip: 1.
 
   optimizer:
