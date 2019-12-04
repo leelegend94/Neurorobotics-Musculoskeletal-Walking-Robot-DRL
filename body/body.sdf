@@ -1,8 +1,11 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-	<physics>
+	<world name="empty_world">
+	<!--<physics type="simbody">
 		<max_step_size>0.0001</max_step_size>
-	</physics>
+		<real_time_factor>0.1</real_time_factor>
+		<real_time_update_rate>1000</real_time_update_rate>
+	</physics>-->
 	<model name="body">
 		<!--<pose frame="ground">0 0 0.25 0 -1.57 0</pose>-->
 		<pose frame="ground">0 0 0.2 0 0 0</pose>
@@ -702,4 +705,5 @@
 		<plugin filename="libgazebo_ros_muscle_interface.so" name="muscle_interface_plugin"/>
 		<!--============================== Includes ===============================-->
 	</model>
+	</world>
 </sdf>

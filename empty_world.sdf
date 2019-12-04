@@ -1,6 +1,14 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
   <world name="default">
+	<physics type="opensim">
+		<!--<max_step_size>0.0001</max_step_size>-->
+		<!--<real_time_factor>0.1</real_time_factor>-->
+		<!--<real_time_update_rate>1000</real_time_update_rate>-->
+		<opensim>
+			<accuracy>0.0001</accuracy>
+		</opensim>
+	</physics>
     <light name='sun' type='directional'>
       <cast_shadows>1</cast_shadows>
       <pose>-11.82075 -19.38429 17.2198 0 -0 0</pose>
