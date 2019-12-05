@@ -1,13 +1,16 @@
+import numpy as np
 class fake_agent():
 	def __init__(self,nS,nA):
 		self.nS = nS
 		self.nA = nA
+		self.step = 0
+
 	def forward(self,nS):
-		clientLogger.info('Use random actions instead...')
-		return np.random.rand(nA)
+		print 'Use random actions instead...'
+		return np.random.rand(self.nA)
 
 	def backward(self,reward):
-		clientLogger.info('Pretend to have received the reward...')
+		print 'Pretend to have received the reward...'
 
-	def save_weights(self,path,ow):
-		clientLogger.info('Pretend to have saved the weights...')
+	def save_weights(self,path,overwrite=False):
+		print 'Pretend to have saved the weights...'

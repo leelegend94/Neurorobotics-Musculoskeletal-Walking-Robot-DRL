@@ -1,14 +1,8 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-	<world name="empty_world">
-	<!--<physics type="simbody">
-		<max_step_size>0.0001</max_step_size>
-		<real_time_factor>0.1</real_time_factor>
-		<real_time_update_rate>1000</real_time_update_rate>
-	</physics>-->
 	<model name="body">
 		<!--<pose frame="ground">0 0 0.25 0 -1.57 0</pose>-->
-		<pose frame="ground">0 0 0.2 0 0 0</pose>
+		<pose frame="ground">0 0 0.15 0 0 0</pose>
 		<!--============================== Links ====================================-->
 		<link name="pelvis">
 			<!--<pose frame="ground">0.   0.   0.95 0.   0.   0.  </pose>-->
@@ -33,6 +27,13 @@
 						<scale> 1 1 1</scale>
 					</mesh>
 				</geometry>
+				<surface>
+					<contact>
+						<opensim>
+							<stiffness>1.1e10</stiffness>
+						</opensim>
+					</contact>
+				</surface>
 			</collision>
 			<visual name="pelvis-sacrum-vis">
 				<pose>-0.  0.  0.  0. -0.  0.</pose>
@@ -535,7 +536,7 @@
 			<parent>world</parent>
 			<child>pelvis</child>
 			<axis> 
-				<xyz>1 0 1</xyz>
+				<xyz>1 0 0</xyz>
 			</axis>
 		</joint>
 
@@ -705,5 +706,4 @@
 		<plugin filename="libgazebo_ros_muscle_interface.so" name="muscle_interface_plugin"/>
 		<!--============================== Includes ===============================-->
 	</model>
-	</world>
 </sdf>

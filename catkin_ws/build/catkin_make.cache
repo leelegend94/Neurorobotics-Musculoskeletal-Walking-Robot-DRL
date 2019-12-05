@@ -1,2 +1,0 @@
-transponder
--DCATKIN_DEVEL_PREFIX=/home/zhenyu/.opt/nrpStorage/template_new_1/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/zhenyu/.opt/nrpStorage/template_new_1/catkin_ws/install -G Unix Makefiles

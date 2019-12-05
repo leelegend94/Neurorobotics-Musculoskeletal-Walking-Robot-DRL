@@ -3,9 +3,12 @@
 @nrp.MapVariable("Height",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("reward",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("agent", initial_value=None, scope=nrp.GLOBAL)
+@nrp.MapVariable("step_", initial_value=None)
+
 @nrp.Robot2Neuron()
-def csv_curr_stat(t, recorder, Height, reward, agent):
+def csv_curr_stat(t, recorder, Height, reward, agent, step_):
 	if agent.value is not None and Height.value is not None:
-		recorder.record_entry(agent.value.step,Height.value,reward.value)
-		#recorder.record_entry(agent.value.step,"1")
-		clientLogger.info('Data Recorded')
+		if agent.value.step != step_.value:
+			recorder.record_entry(agent.value.step,Height.value,reward.value)
+			clientLogger.info('Data Recorded')
+			step_.value = agent.value.step

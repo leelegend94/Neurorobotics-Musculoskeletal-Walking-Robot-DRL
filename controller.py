@@ -11,6 +11,7 @@ from std_msgs.msg import Float64
 @nrp.MapVariable("reward",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("ResetSimulationSrv",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("Height",initial_value=None,scope=nrp.GLOBAL)
+@nrp.MapVariable("t_", initial_value=0)
 #muscles
 
 @nrp.MapRobotPublisher('bifemlh_l', Topic('/gazebo_muscle_interface/body/bifemlh_l/cmd_activation',Float64))
@@ -39,10 +40,10 @@ from std_msgs.msg import Float64
 @nrp.MapRobotPublisher('vas_lat_r', Topic('/gazebo_muscle_interface/body/vas_lat_r/cmd_activation',Float64))
 
 @nrp.Neuron2Robot()
-def controller(t, agent, observation, reward, Height, ResetSimulationSrv, bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r):
-	if agent.value is not None and observation.value is not None:
+def controller(t, t_, agent, observation, reward, Height, ResetSimulationSrv, bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r):
+	if agent.value is not None and observation.value is not None and t-t_.value>0.05:
 
-		if observation.value[2] >= 0.5:
+		if observation.value[2] >= 0.6:
 
 			clientLogger.info("FORWARD PASS")
 			import math
@@ -69,3 +70,5 @@ def controller(t, agent, observation, reward, Height, ResetSimulationSrv, bifeml
 		else:
 			clientLogger.info(str(observation.value[2]))
 			clientLogger.info("failed, waiting for restart")
+
+		t_.value = t

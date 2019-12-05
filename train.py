@@ -6,21 +6,22 @@ import yaml
 from multiprocessing import Process
 from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
 
-EXPERIMENT = "template_new_1"
+EXPERIMENT = "Neurorobotics-Musculoskeletal-Walking-Robot-DRL_0"
 CONFIG_PATH = "./simulation_config" #path for all configuration files
 
 def sim_start(experiment,server,conf):
-'''
-This function will monitor and control the reinforcement learning process, 
-'''
+
+#This function will monitor and control the reinforcement learning process, 
+
 	sim = vc.launch_experiment(experiment)
 
 	config = yaml.load(conf) #load configurations from .yaml file into a dictionary 
 	#print config
 
 	tf_environment = sim.get_transfer_function('environment').splitlines()
-	tf_ddpg = sim.get_transfer_function('init_DRLagent').splitlines()
-
+	#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!TODO
+	tf_ddpg = sim.get_transfer_function('fake_init_DRLagent').splitlines()
+	#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!TODO
 	#add the configuration dictionary as a string in the first line of the code.  
 	tf_environment[0] = "CONFIGURATION = " + str(config)
 	tf_ddpg[0] = "CONFIGURATION = " + str(config)
@@ -33,7 +34,7 @@ This function will monitor and control the reinforcement learning process,
 
 	conf_train = config['Training_Script']
 	MAX_EP = int(conf_train.get("Max_Epoch",100))
-	sim.start()
+	#sim.start()
 
 	history = {'height':[],'reward':[],'total_reward':[]} #a very large dict contains all history
 	history_total_reward = {'total_reward':[]} #only contains the total reward for each epoch, much faster to read.
@@ -41,7 +42,9 @@ This function will monitor and control the reinforcement learning process,
 	#iteration over episodes
 		while True:
 		#try to launch the simulation. error may occur while restarting, therefore pack this part in a loop with try/except. 
+			print "yueyang"
 			try:
+				print "restarting"
 				sim.start() 
 				break
 			except KeyboardInterrupt:
@@ -50,19 +53,21 @@ This function will monitor and control the reinforcement learning process,
 				print "waiting for restart"
 				time.sleep(2)
 				try:
-					sim = vc.launch_experiment('template_new_1')
+					print "try to launch"
+					sim = vc.launch_experiment(EXPERIMENT)
 				except:
-					print "restart failed, try again"
-		
+					print "launch failed, try again"
+		print "linjingjing"
 		itr_idx = 0
 		height = 1
 		total_reward = 0
-		while(itr_idx<100 and height>0.5 and height<1.5):
+		while(itr_idx<5 and height>0.5 and height<1.5):
 		#early terminate the simulation if it jump too high or fall down. the hight of pelvis is used here.
 		#terminate the simulation when reaches maximum steps.
 
 			#retrive current states from csv file
 			csv_curr_stat = sim.get_last_run_csv_file('curr_stat.csv')
+			print csv_curr_stat
 			lst_line = csv_curr_stat.splitlines()[-1].split(',') #last line of the csv, namely the newest states.
 			if lst_line[0] != "itr_idx": #avoiding the case that the csv file contains only the header.
 				print lst_line
