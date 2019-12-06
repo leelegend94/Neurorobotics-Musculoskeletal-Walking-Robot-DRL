@@ -10,18 +10,18 @@ EXPERIMENT = "Neurorobotics-Musculoskeletal-Walking-Robot-DRL_0"
 CONFIG_PATH = "./simulation_config" #path for all configuration files
 
 def sim_start(experiment,server,conf):
-
 #This function will monitor and control the reinforcement learning process, 
 
 	sim = vc.launch_experiment(experiment)
 
 	config = yaml.load(conf) #load configurations from .yaml file into a dictionary 
-	#print config
 
 	tf_environment = sim.get_transfer_function('environment').splitlines()
-	#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!TODO
+
+	#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!TODO!!!!!!!!!!!!!!!!!!!!!!!
 	tf_ddpg = sim.get_transfer_function('fake_init_DRLagent').splitlines()
-	#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!TODO
+	#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!TODO!!!!!!!!!!!!!!!!!!!!!!!
+
 	#add the configuration dictionary as a string in the first line of the code.  
 	tf_environment[0] = "CONFIGURATION = " + str(config)
 	tf_ddpg[0] = "CONFIGURATION = " + str(config)
