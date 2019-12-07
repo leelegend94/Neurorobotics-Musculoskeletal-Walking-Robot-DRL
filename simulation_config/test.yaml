@@ -62,4 +62,4 @@ Environment:
 
 Training_Script:   
   Max_Epoch: 1000
-  result_save_path: ./results
+  Max_Iteration_per_Epoch: 100
