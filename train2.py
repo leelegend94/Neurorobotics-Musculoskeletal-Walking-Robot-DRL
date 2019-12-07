@@ -8,9 +8,12 @@ from multiprocessing import Process
 from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
 
 
-def sim_start(experiment,server,configuration={}):
+def sim_start(experiment,server,config_file_path):
 	sim = vc.launch_experiment(experiment)
 	print "Configuring..."
+
+	#load configurations from .yaml file into a python dictionary
+	config = yaml.load(open(config_file_path))
 
 	tf_environment = sim.get_transfer_function('environment').splitlines()
 	#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!TODO!!!!!!!!!!!!!!!!!!!!!!!
@@ -31,10 +34,10 @@ def sim_start(experiment,server,configuration={}):
 
 	conf_train = config['Training_Script']
 	MAX_EP = int(conf_train.get("Max_Epoch",100))
+	RESULT_SAV_PATH = conf_train.get("result_save_path", "./results")
 
-	history = {'height':[],'reward':[],'total_reward':[]} #a very large dict contains all history
-	history_total_reward = {'total_reward':[]} #only contains the total reward for each epoch, much faster to read.
-	
+	#init csv file for the whole training process
+	history = pd.DataFrame(columns=['itr_idx','height','reward'])
 	for ep in range(MAX_EP):
 	#iteration over episodes
 		nFailed = 0
@@ -58,14 +61,40 @@ def sim_start(experiment,server,configuration={}):
 			else:
 				break
 
-		#--------------------------------------------------#
-		#                      TODO                        #
-		#--------------------------------------------------#
+		itr_idx = 0
+		height = 1
+		total_reward = 0
+		while(itr_idx<5 and height>0.5 and height<1.5):
+		#early terminate the simulation if it jump too high or fall down. the hight of pelvis is used here.
+		#terminate the simulation when reaches maximum steps.
+
+			#retrive current states from csv file
+			csv_curr_stat = sim.get_last_run_csv_file('curr_stat.csv')
+			lst_line = csv_curr_stat.splitlines()[-1].split(',') #last line of the csv, namely the newest states.
+			if lst_line[0] != "itr_idx": #avoiding the case that the csv file contains only the header.
+				#print lst_line
+				itr_idx = int(lst_line[0])
+				height = float(lst_line[1])
+				#reward = float(lst_line[2])
+			time.sleep(0.25)
+
 		sim.stop()
+
+		#transform csv_curr_stat from string to 2D-array
+		data = csv_curr_stat.splitlines()
+		data = list(map(lambda x: x.split(','),data))
+		history = history.append(pd.DataFrame(data=data,columns=['itr_idx','height','reward']))
+
 		while sim.get_state() != "stopped":
 			pass
 
+	#store the history, file name is the same as the config file's name
+	pd.DataFrame(history).to_csv(RESULT_SAV_PATH+'/'+conf.split('/')[-1][:-5]+'.csv')
 
+		#--------------------------------------------------#
+		#                      TODO                        #
+		#--------------------------------------------------#
+		#eval
 def main(experiment,config_path,environment,storage_username,storage_password):
 	vc = VirtualCoach(environment=environment, storage_username=storage_username, storage_password=storage_password)
 	vc.print_cloned_experiments()
@@ -87,16 +116,15 @@ def main(experiment,config_path,environment,storage_username,storage_password):
 		#check whether there is configuration not being simulated yet.
 			if len(servers) > 0:
 			#allocate an availiable server to the simulation, if no server is available, just wait. 
-				curr_path = config_path + "/" + configurations.pop()
-				print curr_path
+				curr_config_path = config_path + "/" + configurations.pop()
+				print curr_config_path
 				
-				#load configurations from .yaml file into a python dictionary
-				config = yaml.load(open(curr_path))
+				
 
 				server = servers.pop()
 
 				#create a new process to run the simulation
-				p = Process(target=sim_start, args=(experiment,server,config))
+				p = Process(target=sim_start, args=(experiment,server,curr_config_path))
 				p.start()
 			else:
 				print len(configurations)," configurations in queue. Waiting for available server"

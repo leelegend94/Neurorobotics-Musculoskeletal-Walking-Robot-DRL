@@ -53,6 +53,7 @@ DDPG_Agent:
       - mae
 
   weights_sav_path:
+  #don't use relative path
     /home/.opt/nrpStorage/template_new_1/ddpg_weights.h5
 
 Environment:
@@ -61,3 +62,4 @@ Environment:
 
 Training_Script:   
   Max_Epoch: 1000
+  result_save_path: ./results

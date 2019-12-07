@@ -42,7 +42,6 @@ def sim_start(experiment,server,conf):
 	#iteration over episodes
 		while True:
 		#try to launch the simulation. error may occur while restarting, therefore pack this part in a loop with try/except. 
-			print "yueyang"
 			try:
 				print "restarting"
 				sim.start() 
@@ -57,7 +56,7 @@ def sim_start(experiment,server,conf):
 					sim = vc.launch_experiment(EXPERIMENT)
 				except:
 					print "launch failed, try again"
-		print "linjingjing"
+
 		itr_idx = 0
 		height = 1
 		total_reward = 0
