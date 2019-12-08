@@ -10,7 +10,14 @@ def fake_init_DRLagent(t, agent, conf):
         import sys
         sys.path.append("/home/zhenyuli/.opt/nrpStorage/Neurorobotics-Musculoskeletal-Walking-Robot-DRL_0")
         from fake_agent import fake_agent
-
+        
+        import site, os
+        site.addsitedir(os.path.expanduser('~/.opt/tensorflow1_venv/lib/python2.7/site-packages'))
+        import tensorflow as tf
+        hello = tf.constant('Hello, TensorFlow!')
+        sess = tf.Session()
+        clientLogger.info(sess.run(hello))
+        
         nS = 58
         nA = 24
 

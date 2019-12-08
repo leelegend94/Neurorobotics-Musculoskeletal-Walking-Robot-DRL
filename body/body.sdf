@@ -2,7 +2,7 @@
 <sdf version="1.6">
 	<model name="body">
 		<!--<pose frame="ground">0 0 0.25 0 -1.57 0</pose>-->
-		<pose frame="ground">0 0 0.15 0 0 0</pose>
+		<pose frame="ground">0 0 0.05 0 0 0</pose>
 		<!--============================== Links ====================================-->
 		<link name="pelvis">
 			<!--<pose frame="ground">0.   0.   0.95 0.   0.   0.  </pose>-->
@@ -536,7 +536,7 @@
 			<parent>world</parent>
 			<child>pelvis</child>
 			<axis> 
-				<xyz>1 0 0</xyz>
+				<xyz>1 0 1</xyz>
 			</axis>
 		</joint>
 

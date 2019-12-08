@@ -10,14 +10,17 @@ def init_DRLagent(t, agent, conf):
         # import keras-rl in NRP through virtual env
         clientLogger.info('before import')
         import site, os
-        #site.addsitedir(os.path.expanduser('~/env_NRP_py3/lib/python3.5/site-packages'))
-        #site.addsitedir(os.path.expanduser('~/workspace/NRP_TF_venv/lib/python2.7/site-packages'))
-        site.addsitedir('/home/zhenyu/workspace/nrp_tf_venv/lib/python2.7/site-packages')
+        site.addsitedir(os.path.expanduser('~/.opt/tensorflow1_venv/lib/python2.7/site-packages'))
+        #import tensorflow as tf
+        '''
+        from tensorflow.keras import Model, Sequential, Input
+        from tensorflow.keras.layers import Dense, Activation, Flatten,concatenate
+        from keras.optimizers import Adam
+        '''
         from keras.models import Model, Sequential
-        clientLogger.info('first keras model')
         from keras.layers import Dense, Activation, Flatten, Input, concatenate
-        from keras.optimizers import Adam, RMSprop
-        
+        from keras.optimizers import Adam
+
         from rl.agents import DDPGAgent
         from rl.memory import SequentialMemory
         from rl.random import OrnsteinUhlenbeckProcess
@@ -60,8 +63,9 @@ def init_DRLagent(t, agent, conf):
         #actor.add(Activation('sigmoid'))
 
         for layer in actor_layers:
-            actor.add(Dense(layer[0],activation=layer[1]))
-        actor.add(Dense(nA,activation=actor_act))
+            clientLogger.info(layer[0])
+            actor.add(Dense(layer[0],activation=layer[1],kernel_initializer='RandomNormal'))
+        actor.add(Dense(nA,activation=actor_act,kernel_initializer='RandomNormal'))
 
         # critic net (s,a) --> Q(s,a)
         action_input = Input(shape=(nA,), name='action_input')
@@ -79,24 +83,36 @@ def init_DRLagent(t, agent, conf):
         #x = Activation('linear')(x)
         
         for layer in critic_layers:
-            x = Dense(layer[0],activation=layer[1])(x)
-        x = Dense(1,activation=critic_act)(x)
+            clientLogger.info(layer[0])
+            x = Dense(layer[0],activation=layer[1],kernel_initializer='RandomNormal')(x)
+        x = Dense(1,activation=critic_act,kernel_initializer='RandomNormal')(x)
         critic = Model(inputs=[action_input, observation_input], outputs=x)
 
-        
+        clientLogger.info(agent_args)
         # instanstiate rl agent
-        agent.value = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process), **agent_args)
-        agent.value.training = True
+        
+        #agent.value = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process), **agent_args)
+        #memory = SequentialMemory(limit=100000, window_length=1)
+        #random_process = OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=.2, size=nA)
+        #agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=memory, random_process=random_process)
+        agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process))
+        agent_.training = True
 
         #PATH = '/home/.opt/nrpStorage/template_new_1/ddpg_weights.h5'
-        PATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"/home/.opt/nrpStorage/template_new_1/ddpg_weights.h5")
+        PATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"/home/.opt/nrpStorage/template_new_1/ddpg_weights_actor.h5")
         if os.path.isfile(PATH):
             clientLogger.info('weights loaded!')
-            agent.value.load_weights(PATH)
+            agent_.load_weights(PATH)
         clientLogger.info('WTF2!!!!!!')
 
-        agent.value.compile(optimizer=eval(optimizer),**compiler_args)
+        agent_.compile(optimizer=eval(optimizer),metrics=['mae'])
+        #agent_.compile(optimizer=Adam(lr=.001, clipnorm=1.),metrics=['mae'])
+        #agent_.compile(Adam(lr=.001, clipnorm=1.), metrics=['mae'])
+        #agent_.compile('adam', metrics=['mae'])
+
+        agent.value = agent_
         clientLogger.info('***********************')
         clientLogger.info('DDPG agent ready!')
         clientLogger.info('***********************')
+
         

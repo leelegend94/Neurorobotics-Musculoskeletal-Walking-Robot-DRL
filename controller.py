@@ -62,11 +62,12 @@ def controller(t, t_, agent, observation, reward, Height, ResetSimulationSrv, bi
 
 			clientLogger.info('BACKWARD PASS, step ', agent.value.step)
 			clientLogger.info('Amount of reward ', reward.value)
-		
+			'''
 			if agent.value.step%10 == 0:
 				clientLogger.info('saving weights')
 				PATH = '/home/zhenyu/.opt/nrpStorage/template_new_1/ddpg_weights.h5'
 				agent.value.save_weights(PATH, overwrite=True)
+			'''
 		else:
 			clientLogger.info(str(observation.value[2]))
 			clientLogger.info("failed, waiting for restart")

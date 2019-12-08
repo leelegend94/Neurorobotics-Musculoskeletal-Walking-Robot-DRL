@@ -34,7 +34,7 @@ def sim_start(experiment,server,config_file_path,results_save_path):
 
 	conf_train = config['Training_Script']
 	MAX_EP = int(conf_train.get("Max_Epoch",1000))
-	MAX_ITER = int(conf_train.get("Max_Iteration_per_Epoch",100))
+	MAX_ITER = int(conf_train.get("Max_Iteration_per_Epoch",200))
 
 	#init csv file for the whole training process
 	history = pd.DataFrame(columns=['itr_idx','height','reward'])

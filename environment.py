@@ -1,7 +1,6 @@
 CONFIGURATION = {}
 #REWARD_FUNC = "5*link_vlin[0].x-link_vlin[0].y-2*link_vlin[0].z-1"
 import rospy
-
 rospy.wait_for_service("/gazebo/get_joint_properties")
 rospy.wait_for_service("/gazebo/get_link_properties")
 rospy.wait_for_service("/gazebo/get_link_state")
@@ -20,6 +19,7 @@ rospy.wait_for_service("/gazebo/get_link_state")
 @nrp.Robot2Neuron()
 def environment(t, conf, observation, reward, Height, ActiBelt_Data, link_mass, GetJointPropertiesSrv,GetLinkPropertiesSrv,GetLinkStateSrv,ResetSimulationSrv):
 	import rospy
+	import numpy as np
 	joints = ["hip_r","hip_l","knee_r","knee_l","ankle_r","ankle_l"]
 	links = ["pelvis","torso","femur_r","femur_l","tibia_l","tibia_r","talus_r","talus_l","toes_r","toes_l","ActiBelt"]
 	if GetJointPropertiesSrv.value is None:
@@ -112,7 +112,7 @@ def environment(t, conf, observation, reward, Height, ActiBelt_Data, link_mass, 
 			observation += [pos.x,pos.y,pos.z]
 
 
-		reward = eval(conf.value.get('Environment',{}).get('reward_function',"5*link_vlin[0].x-link_vlin[0].y-2*link_vlin[0].z-1"))
+		reward = eval(conf.value.get('Environment',{}).get('reward_function',"5*link_vlin[0].x-link_vlin[0].y-2*link_vlin[0].z+1"))
 		return observation,reward,Height
 
 	observation.value,reward.value,Height.value = update(joints,links)
