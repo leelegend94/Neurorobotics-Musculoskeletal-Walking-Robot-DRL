@@ -3,12 +3,12 @@ CONFIGURATION = {}
 # internal keras-rl agent to persist
 @nrp.MapVariable("agent", initial_value=None, scope=nrp.GLOBAL)
 @nrp.MapVariable("conf",initial_value=CONFIGURATION)
+
 @nrp.Robot2Neuron()
 def init_DRLagent(t, agent, conf):
     # initialize the keras-rl agent
     if agent.value is None:
         # import keras-rl in NRP through virtual env
-        clientLogger.info('before import')
         import site, os
         site.addsitedir(os.path.expanduser('~/.opt/tensorflow1_venv/lib/python2.7/site-packages'))
         #import tensorflow as tf
@@ -88,24 +88,28 @@ def init_DRLagent(t, agent, conf):
         x = Dense(1,activation=critic_act,kernel_initializer='RandomNormal')(x)
         critic = Model(inputs=[action_input, observation_input], outputs=x)
 
-        clientLogger.info(agent_args)
+        #clientLogger.info(agent_args)
         # instanstiate rl agent
         
         #agent.value = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process), **agent_args)
         #memory = SequentialMemory(limit=100000, window_length=1)
         #random_process = OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=.2, size=nA)
         #agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=memory, random_process=random_process)
-        agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process))
+
+        agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process),nb_steps_warmup_critic=5, nb_steps_warmup_actor=5, gamma=.99, batch_size=5, target_model_update=1e-3, delta_clip=1.)
+
         agent_.training = True
 
-        #PATH = '/home/.opt/nrpStorage/template_new_1/ddpg_weights.h5'
-        PATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"/home/.opt/nrpStorage/template_new_1/ddpg_weights_actor.h5")
-        if os.path.isfile(PATH):
-            clientLogger.info('weights loaded!')
-            agent_.load_weights(PATH)
-        clientLogger.info('WTF2!!!!!!')
-
         agent_.compile(optimizer=eval(optimizer),metrics=['mae'])
+        
+        #Why this strange path? --> cf. "https://github.com/keras-rl/keras-rl/blob/master/rl/agents/ddpg.py" line 158-171
+        WeightsPATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
+        clientLogger.info(WeightsPATH)
+        clientLogger.info(conf.value)
+        if os.path.isfile(os.path.expanduser(WeightsPATH+"/ddpg_weights_actor.h5")):
+            agent_.load_weights(os.path.expanduser(WeightsPATH+"/ddpg_weights.h5"))
+            clientLogger.info('weights loaded!')
+        
         #agent_.compile(optimizer=Adam(lr=.001, clipnorm=1.),metrics=['mae'])
         #agent_.compile(Adam(lr=.001, clipnorm=1.), metrics=['mae'])
         #agent_.compile('adam', metrics=['mae'])

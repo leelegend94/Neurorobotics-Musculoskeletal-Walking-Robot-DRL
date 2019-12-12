@@ -57,7 +57,7 @@
               "reorderEnabled": true,
               "title": "",
               "activeItemIndex": 0,
-              "width": 78.36085453426477,
+              "width": 51.61290322580645,
               "height": 100,
               "content": [
                 {
@@ -79,28 +79,62 @@
               ]
             },
             {
-              "type": "stack",
+              "type": "column",
               "isClosable": true,
               "reorderEnabled": true,
               "title": "",
-              "activeItemIndex": 0,
-              "height": 100,
-              "width": 21.639145465735222,
+              "width": 48.387096774193544,
               "content": [
                 {
-                  "type": "component",
-                  "title": "Log Console",
-                  "id": "log-console",
-                  "componentName": "angularModuleComponent",
-                  "componentState": {
-                    "module": "exdFrontendApp",
-                    "angularDirective": "<log-console />",
-                    "singleton": true
-                  },
-                  "pwidth": 400,
-                  "pheight": 300,
+                  "type": "stack",
                   "isClosable": true,
-                  "reorderEnabled": true
+                  "reorderEnabled": true,
+                  "title": "",
+                  "activeItemIndex": 0,
+                  "height": 30,
+                  "width": 31.324106355459808,
+                  "content": [
+                    {
+                      "type": "component",
+                      "title": "Log Console",
+                      "id": "log-console",
+                      "componentName": "angularModuleComponent",
+                      "componentState": {
+                        "module": "exdFrontendApp",
+                        "angularDirective": "<log-console />",
+                        "singleton": true
+                      },
+                      "pwidth": 400,
+                      "pheight": 300,
+                      "isClosable": true,
+                      "reorderEnabled": true
+                    }
+                  ]
+                },
+                {
+                  "type": "stack",
+                  "isClosable": true,
+                  "reorderEnabled": true,
+                  "title": "",
+                  "activeItemIndex": 0,
+                  "height": 70,
+                  "content": [
+                    {
+                      "type": "component",
+                      "title": "TF Editor",
+                      "id": "transfer-function-editor",
+                      "componentName": "angularModuleComponent",
+                      "componentState": {
+                        "module": "exdFrontendApp",
+                        "angularDirective": "<transfer-function-editor />",
+                        "singleton": true
+                      },
+                      "pwidth": 900,
+                      "pheight": 700,
+                      "isClosable": true,
+                      "reorderEnabled": true
+                    }
+                  ]
                 }
               ]
             }

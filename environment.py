@@ -1,5 +1,5 @@
 CONFIGURATION = {}
-#REWARD_FUNC = "5*link_vlin[0].x-link_vlin[0].y-2*link_vlin[0].z-1"
+
 import rospy
 rospy.wait_for_service("/gazebo/get_joint_properties")
 rospy.wait_for_service("/gazebo/get_link_properties")

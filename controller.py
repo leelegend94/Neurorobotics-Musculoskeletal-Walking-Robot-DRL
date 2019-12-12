@@ -1,3 +1,4 @@
+CONFIGURATION = {}
 """
 This module contains the transfer function which is responsible for determining the muscle movements of the myoarm
 """
@@ -11,6 +12,7 @@ from std_msgs.msg import Float64
 @nrp.MapVariable("reward",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("ResetSimulationSrv",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("Height",initial_value=None,scope=nrp.GLOBAL)
+@nrp.MapVariable("conf",initial_value=CONFIGURATION)
 @nrp.MapVariable("t_", initial_value=0)
 #muscles
 
@@ -40,7 +42,7 @@ from std_msgs.msg import Float64
 @nrp.MapRobotPublisher('vas_lat_r', Topic('/gazebo_muscle_interface/body/vas_lat_r/cmd_activation',Float64))
 
 @nrp.Neuron2Robot()
-def controller(t, t_, agent, observation, reward, Height, ResetSimulationSrv, bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r):
+def controller(t, t_, agent, conf, observation, reward, Height, ResetSimulationSrv, bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r):
 	if agent.value is not None and observation.value is not None and t-t_.value>0.05:
 
 		if observation.value[2] >= 0.6:
@@ -62,12 +64,13 @@ def controller(t, t_, agent, observation, reward, Height, ResetSimulationSrv, bi
 
 			clientLogger.info('BACKWARD PASS, step ', agent.value.step)
 			clientLogger.info('Amount of reward ', reward.value)
-			'''
+			
 			if agent.value.step%10 == 0:
 				clientLogger.info('saving weights')
-				PATH = '/home/zhenyu/.opt/nrpStorage/template_new_1/ddpg_weights.h5'
-				agent.value.save_weights(PATH, overwrite=True)
-			'''
+				import os
+				WeightsPATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
+				agent.value.save_weights(os.path.expanduser(WeightsPATH+"/ddpg_weights.h5"), overwrite=True)
+				#agent.value.save_weights("/home/zhenyuli/.opt/weights/ddpg_weights.h5", overwrite=True)
 		else:
 			clientLogger.info(str(observation.value[2]))
 			clientLogger.info("failed, waiting for restart")

@@ -53,13 +53,14 @@ DDPG_Agent:
       - mae
 
   weights_sav_path:
-  #don't use relative path
-    /home/.opt/nrpStorage/template_new_1/ddpg_weights.h5
+  #don't use relative path, only contain lower case!!!
+    #~/.opt/nrpStorage/Neurorobotics-Musculoskeletal-Walking-Robot-DRL_0
+    ~/.opt/weights
 
 Environment:
   reward_function:
     np.clip(5*link_vlin[0].x-abs(link_vlin[0].y)-2*abs(link_vlin[0].z)+1,-50,50)
 
 Training_Script:   
-  Max_Epoch: 1000
+  Max_Epoch: 200
   Max_Iteration_per_Epoch: 200
