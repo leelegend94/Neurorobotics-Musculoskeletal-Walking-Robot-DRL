@@ -59,11 +59,11 @@ def controller(t, t_, agent, conf, observation, reward, Height, ResetSimulationS
 				muscle.send_message(std_msgs.msg.Float64(action[idx]))
 
 			#learn from the reward
-			agent.value.backward(reward.value)
+			agent.value.backward(reward.value-sum(action)/24)
 			agent.value.step = agent.value.step + 1
 
 			clientLogger.info('BACKWARD PASS, step ', agent.value.step)
-			clientLogger.info('Amount of reward ', reward.value)
+			clientLogger.info('Amount of reward ', reward.value-sum(action)/24)
 			
 			if agent.value.step%10 == 0:
 				clientLogger.info('saving weights')
