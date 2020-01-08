@@ -10,14 +10,16 @@ rospy.wait_for_service("/gazebo/get_link_state")
 @nrp.MapVariable("reward",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("Height",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("ActiBelt_Data",initial_value=None,scope=nrp.GLOBAL)
+
 @nrp.MapVariable("GetJointPropertiesSrv",initial_value=None)
 @nrp.MapVariable("GetLinkPropertiesSrv",initial_value=None)
 @nrp.MapVariable("GetLinkStateSrv",initial_value=None)
-@nrp.MapVariable("ResetSimulationSrv",initial_value=None,scope=nrp.GLOBAL)
+#@nrp.MapVariable("ResetSimulationSrv",initial_value=None,scope=nrp.GLOBAL)
+
 @nrp.MapVariable("link_mass",initial_value=None)
 
 @nrp.Robot2Neuron()
-def environment(t, conf, observation, reward, Height, ActiBelt_Data, link_mass, GetJointPropertiesSrv,GetLinkPropertiesSrv,GetLinkStateSrv,ResetSimulationSrv):
+def environment(t, conf, observation, reward, Height, ActiBelt_Data, link_mass, GetJointPropertiesSrv,GetLinkPropertiesSrv,GetLinkStateSrv):
 	import rospy
 	import numpy as np
 	joints = ["hip_r","hip_l","knee_r","knee_l","ankle_r","ankle_l"]
@@ -33,10 +35,6 @@ def environment(t, conf, observation, reward, Height, ActiBelt_Data, link_mass, 
 	if GetLinkStateSrv.value is None:
 		from gazebo_msgs.srv import GetLinkState
 		GetLinkStateSrv.value = rospy.ServiceProxy("/gazebo/get_link_state",GetLinkState)
-
-	if ResetSimulationSrv is None:
-		from cle_ros_msgs.srv import ResetSimulation
-		ResetSimulationSrv.value = rospy.ServiceProxy("/ros_cle_simulation/0/reset",ResetSimulation)
 
 	if link_mass.value is None:
 		link_mass.value = []
@@ -113,8 +111,13 @@ def environment(t, conf, observation, reward, Height, ActiBelt_Data, link_mass, 
 
 
 		reward = eval(conf.value.get('Environment',{}).get('reward_function',"5*link_vlin[0].x-link_vlin[0].y-2*link_vlin[0].z+1"))
+		#reward is further rudeced by the sum of muscle activation
 		return observation,reward,Height
 
 	observation.value,reward.value,Height.value = update(joints,links)
+
+
+
+
 
 

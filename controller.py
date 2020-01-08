@@ -10,10 +10,15 @@ from std_msgs.msg import Float64
 @nrp.MapVariable("agent", initial_value=None, scope=nrp.GLOBAL)
 @nrp.MapVariable("observation",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("reward",initial_value=None,scope=nrp.GLOBAL)
-@nrp.MapVariable("ResetSimulationSrv",initial_value=None,scope=nrp.GLOBAL)
+@nrp.MapVariable("ResetSimulationSrv",initial_value=None)
 @nrp.MapVariable("Height",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("conf",initial_value=CONFIGURATION)
 @nrp.MapVariable("t_", initial_value=0)
+
+@nrp.MapVariable("nb_itr",initial_value=1)
+@nrp.MapVariable("nb_ep",initial_value=1, scope=nrp.GLOBAL)
+@nrp.MapVariable("MAX_ITR",initial_value=CONFIGURATION.get('Training',{}).get('Max_Iteration_per_Epoch',200))
+
 #muscles
 
 @nrp.MapRobotPublisher('bifemlh_l', Topic('/gazebo_muscle_interface/body/bifemlh_l/cmd_activation',Float64))
@@ -42,10 +47,15 @@ from std_msgs.msg import Float64
 @nrp.MapRobotPublisher('vas_lat_r', Topic('/gazebo_muscle_interface/body/vas_lat_r/cmd_activation',Float64))
 
 @nrp.Neuron2Robot()
-def controller(t, t_, agent, conf, observation, reward, Height, ResetSimulationSrv, bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r):
+def controller(t, t_, agent, conf, observation, MAX_ITR, reward, Height, nb_ep, nb_itr, ResetSimulationSrv, bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r):
+	if ResetSimulationSrv.value is None:
+		import rospy
+		from std_srvs.srv import Empty
+		ResetSimulationSrv.value = rospy.ServiceProxy("/gazebo/reset_simulation",Empty)
+
 	if agent.value is not None and observation.value is not None and t-t_.value>0.05:
 
-		if observation.value[2] >= 0.6:
+		if observation.value[2] >= 0.6 and nb_itr.value<MAX_ITR.value:
 
 			clientLogger.info("FORWARD PASS")
 			import math
@@ -58,21 +68,29 @@ def controller(t, t_, agent, conf, observation, reward, Height, ResetSimulationS
 			for idx,muscle in enumerate(muscles_list):
 				muscle.send_message(std_msgs.msg.Float64(action[idx]))
 
-			#learn from the reward
-			agent.value.backward(reward.value-sum(action)/24)
+			#learn from the raeward
+			agent.value.backward(reward.value-sum(action)/10)
 			agent.value.step = agent.value.step + 1
 
 			clientLogger.info('BACKWARD PASS, step ', agent.value.step)
-			clientLogger.info('Amount of reward ', reward.value-sum(action)/24)
+			clientLogger.info('itr. No. ', nb_itr.value)
+			clientLogger.info('ep. No. ', nb_ep.value)
+			clientLogger.info('Amount of reward ', reward.value-sum(action)/10)
 			
 			if agent.value.step%10 == 0:
 				clientLogger.info('saving weights')
 				import os
 				WeightsPATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
-				agent.value.save_weights(os.path.expanduser(WeightsPATH+"/ddpg_weights.h5"), overwrite=True)
+				conf_name = conf.value.get('NAME','default')
+				agent.value.save_weights(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights.h5"), overwrite=True)
 				#agent.value.save_weights("/home/zhenyuli/.opt/weights/ddpg_weights.h5", overwrite=True)
+			nb_itr.value = nb_itr.value + 1
 		else:
 			clientLogger.info(str(observation.value[2]))
-			clientLogger.info("failed, waiting for restart")
+			clientLogger.info("failed, restart")
+			from std_srvs.srv import Empty
+			ResetSimulationSrv.value()
+			nb_itr.value = 0
+			nb_ep.value = nb_ep.value + 1
 
 		t_.value = t

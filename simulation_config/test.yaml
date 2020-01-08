@@ -1,3 +1,7 @@
+#DONT DELET THIS LINE
+#The first line is reserved for internal usage. Don't write anything important there and leave it unchanged.
+#file name of all configuration yaml file must only contain LOWERCASE
+
 #Parallel Simulation(multiple backends):
 #Prepare different configuration files in the following way.
 #You can only specify the values which are changed compared with the default configuration.   
@@ -32,14 +36,14 @@ DDPG_Agent:
         - relu 
     output_activation: linear
 
-  random_process: OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=.2, size=nA) #size=nA should not be changed
+  random_process: OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=1, size=nA) #size=nA should not be changed
 
   memory: SequentialMemory(limit=100000, window_length=1)
 
   agent:
     #keyword arguments for rl.agents.DDPGAgent()
-    nb_steps_warmup_critic: 10
-    nb_steps_warmup_actor: 10
+    nb_steps_warmup_critic: 100
+    nb_steps_warmup_actor: 100
     gamma: .99
     batch_size: 5
     target_model_update: 0.001
@@ -61,6 +65,6 @@ Environment:
   reward_function:
     np.clip(5*link_vlin[0].x-abs(link_vlin[0].y)-2*abs(link_vlin[0].z)+1,-50,50)
 
-Training_Script:   
-  Max_Epoch: 200
+Training:   
+  Max_Epoch: 300
   Max_Iteration_per_Epoch: 200

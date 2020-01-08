@@ -35,9 +35,9 @@ def init_DRLagent(t, agent, conf):
         critic_act = conf.value.get('DDPG_Agent',{}).get('CriticNet',{}).get('output_activation','linear')
 
         memory = conf.value.get('DDPG_Agent',{}).get('memory',"SequentialMemory(limit=100000, window_length=1)")
-        random_process = conf.value.get('DDPG_Agent',{}).get('random_process', "OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=.2, size=nA)")
+        random_process = conf.value.get('DDPG_Agent',{}).get('random_process', "OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=1, size=nA)")
 
-        agent_args = conf.value.get('DDPG_Agent',{}).get('agent',{'nb_steps_warmup_critic':10, 'nb_steps_warmup_actor':10,'gamma':.99, 'batch_size':5, 'target_model_update':1e-3, 'delta_clip':1.})
+        agent_args = conf.value.get('DDPG_Agent',{}).get('agent',{'nb_steps_warmup_critic':100, 'nb_steps_warmup_actor':100,'gamma':.99, 'batch_size':5, 'target_model_update':1e-3, 'delta_clip':1.})
         #agent_args = conf.value.get('DDPG_Agent',{}).get('agent',{'nb_steps_warmup_critic':10})
         compiler_args = conf.value.get('DDPG_Agent',{}).get('compiler',{'metrics':['mae']})
         optimizer = conf.value.get('DDPG_Agent',{}).get('optimizer','Adam(lr=.001, clipnorm=1.)')
@@ -96,7 +96,7 @@ def init_DRLagent(t, agent, conf):
         #random_process = OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=.2, size=nA)
         #agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=memory, random_process=random_process)
 
-        agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process),nb_steps_warmup_critic=5, nb_steps_warmup_actor=5, gamma=.99, batch_size=5, target_model_update=1e-3, delta_clip=1.)
+        agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process),nb_steps_warmup_critic=100, nb_steps_warmup_actor=100, gamma=.99, batch_size=5, target_model_update=1e-3, delta_clip=1.)
 
         agent_.training = True
 
@@ -106,8 +106,9 @@ def init_DRLagent(t, agent, conf):
         WeightsPATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
         clientLogger.info(WeightsPATH)
         clientLogger.info(conf.value)
-        if os.path.isfile(os.path.expanduser(WeightsPATH+"/ddpg_weights_actor.h5")):
-            agent_.load_weights(os.path.expanduser(WeightsPATH+"/ddpg_weights.h5"))
+        conf_name = conf.value.get('NAME','default')
+        if os.path.isfile(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights_actor.h5")):
+            agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights.h5"))
             clientLogger.info('weights loaded!')
         
         #agent_.compile(optimizer=Adam(lr=.001, clipnorm=1.),metrics=['mae'])
