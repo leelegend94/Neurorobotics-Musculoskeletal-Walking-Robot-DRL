@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.79.0 commit date:2018-05-26, commit time:21:51, hash:32432d91bbe</authoring_tool>
+    </contributor>
+    <created>2018-09-04T00:14:08</created>
+    <modified>2018-09-04T00:14:08</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images/>
+  <library_geometries>
+    <geometry id="Anchor2-mesh" name="Anchor2">
+      <mesh>
+        <source id="Anchor2-mesh-positions">
+          <float_array id="Anchor2-mesh-positions-array" count="24">-0.25 0.4 0 -0.25 0.3 0 -0.25 0.4 0.1 -0.25 0.3 0.1 0.25 0.4 0 0.25 0.4 0.1 0.25 0.3 0 0.25 0.3 0.1</float_array>
+          <technique_common>
+            <accessor source="#Anchor2-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Anchor2-mesh-normals">
+          <float_array id="Anchor2-mesh-normals-array" count="18">-1 0 0 1 0 0 0 0 -1 0 0 1 0 1 0 0 -1 0</float_array>
+          <technique_common>
+            <accessor source="#Anchor2-mesh-normals-array" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Anchor2-mesh-vertices">
+          <input semantic="POSITION" source="#Anchor2-mesh-positions"/>
+        </vertices>
+        <triangles count="12">
+          <input semantic="VERTEX" source="#Anchor2-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Anchor2-mesh-normals" offset="1"/>
+          <p>0 0 1 0 2 0 3 0 2 0 1 0 4 1 5 1 6 1 7 1 6 1 5 1 0 2 4 2 1 2 6 2 1 2 4 2 2 3 3 3 5 3 7 3 5 3 3 3 0 4 2 4 4 4 5 4 4 4 2 4 1 5 6 5 3 5 7 5 3 5 6 5</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Anchor2" name="Anchor2" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Anchor2-mesh" name="Anchor2"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

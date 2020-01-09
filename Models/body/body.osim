@@ -1,0 +1,1512 @@
+<?xml version="1.0" ?>
+<OpenSimDocument Version="20303">
+	<Model>
+		<BodySet>
+			<objects>
+				<Body name="femur_r">
+					<WrapObjectSet name="">
+						<objects>
+							<WrapCylinder name="FRWrapJointr">
+								<xyz_body_rotation>1.57 0 0</xyz_body_rotation>
+								<translation>0 0 -0.403</translation>
+								<radius>0.036</radius>
+								<length>0.5</length>
+								<quadrant>+x</quadrant>
+								<active>true</active>
+							</WrapCylinder>
+						</objects>
+						<groups/>
+					</WrapObjectSet>
+				</Body>
+				<Body name="femur_l">
+					<WrapObjectSet name="">
+						<objects>
+							<WrapCylinder name="FRWrapJointl">
+								<xyz_body_rotation>1.57 0 0</xyz_body_rotation>
+								<translation>0 0 0.403</translation>
+								<radius>0.036</radius>
+								<length>0.5</length>
+								<quadrant>+x</quadrant>
+								<active>true</active>
+							</WrapCylinder>
+						</objects>
+						<groups/>
+					</WrapObjectSet>
+				</Body>
+			</objects>
+		</BodySet>
+		<ForceSet>
+			<objects>
+				
+				<Thelen2003Muscle name="semimem_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="semimem_r-P1">
+									<location>-0.1192  -0.07151 -0.09747</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="semimem_r-P2">
+									<location>-0.0348   0.01891 -0.03519</location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="semimem_r-P3">
+									<location>-0.027    0.01957 -0.04771</location>
+									<body>tibia_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1288</max_isometric_force>
+					<optimal_fiber_length>0.08</optimal_fiber_length>
+					<tendon_slack_length>0.359</tendon_slack_length>
+					<pennation_angle_at_optimal>0.26179939</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="semiten_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="semiten_r-P1">
+									<location>-0.12635 -0.06039 -0.10988</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="semiten_r-P2">
+									<location>-0.04203  0.02277 -0.02859</location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="semiten_r-P3">
+									<location>-0.03322  0.02288 -0.05282</location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="semiten_r-P4">
+									<location>-0.0113  0.0245 -0.0746</location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="semiten_r-P5">
+									<location> 0.0027  0.0193 -0.0956</location>
+									<body>tibia_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>410</max_isometric_force>
+					<optimal_fiber_length>0.201</optimal_fiber_length>
+					<tendon_slack_length>0.2555</tendon_slack_length>
+					<pennation_angle_at_optimal>0.08726646</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="bifemlh_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="bifemlh_r-P1">
+									<location>-0.12596 -0.06944 -0.10257</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="bifemlh_r-P2">
+									<location>-0.0301  -0.02943 -0.036  </location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="bifemlh_r-P3">
+									<location>-0.0234 -0.0343 -0.0563</location>
+									<body>tibia_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>896</max_isometric_force>
+					<optimal_fiber_length>0.109</optimal_fiber_length>
+					<tendon_slack_length>0.326</tendon_slack_length>
+					<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="bifemsh_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="bifemsh_r-P1">
+									<location> 0.005  -0.0234 -0.2111</location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="bifemsh_r-P2">
+									<location>-0.0301  -0.02943 -0.036  </location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="bifemsh_r-P3">
+									<location>-0.0234 -0.0343 -0.0563</location>
+									<body>tibia_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>804</max_isometric_force>
+					<optimal_fiber_length>0.173</optimal_fiber_length>
+					<tendon_slack_length>0.089</tendon_slack_length>
+					<pennation_angle_at_optimal>0.40142573</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				
+				
+				<Thelen2003Muscle name="glut_max2_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="glut_max2_r-P1">
+									<location>-0.1349 -0.0563  0.0176</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="glut_max2_r-P2">
+									<location>-0.1376 -0.0914 -0.052 </location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="glut_max2_r-P3">
+									<location>-0.0426 -0.0293 -0.053 </location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="glut_max2_r-P4">
+									<location>-0.0156 -0.0419 -0.1016</location>
+									<body>femur_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>819</max_isometric_force>
+					<optimal_fiber_length>0.147</optimal_fiber_length>
+					<tendon_slack_length>0.127</tendon_slack_length>
+					<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+
+				<Thelen2003Muscle name="iliacus_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="iliacus_r-P1">
+									<location>-0.0674 -0.0854  0.0365</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="iliacus_r-P2">
+									<location>-0.0258 -0.0811 -0.055 </location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="iliacus_r-P3">
+									<location>-0.0288 -0.0816 -0.0805</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="iliacus_r-P4">
+									<location> 0.0017 -0.0057 -0.0543</location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="iliacus_r-P5">
+									<location>-0.0193 -0.0129 -0.0621</location>
+									<body>femur_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1073</max_isometric_force>
+					<optimal_fiber_length>0.1</optimal_fiber_length>
+					<tendon_slack_length>0.1</tendon_slack_length>
+					<pennation_angle_at_optimal>0.12217305</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+
+				
+				<!--
+				<Thelen2003Muscle name="peri_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="peri_r-P1">
+									<location>-0.1396 -0.0235  0.0003</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="peri_r-P2">
+									<location>-0.1193 -0.0657 -0.0276</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="peri_r-P3">
+									<location>-0.0148 -0.0437 -0.0036</location>
+									<body>femur_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>444</max_isometric_force>
+					<optimal_fiber_length>0.026</optimal_fiber_length>
+					<tendon_slack_length>0.115</tendon_slack_length>
+					<pennation_angle_at_optimal>0.17453293</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+			-->
+				
+				<Thelen2003Muscle name="rect_fem_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="rect_fem_r-P1">
+									<location>-0.0295 -0.0968 -0.0311</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="rect_fem_r-P3">
+									<location> 0.0422074 -0.0014     0.0242373</location>
+									<body>tibia_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="FRWrapJointr-rect_fem_r-pw">
+									<wrap_object>FRWrapJointr</wrap_object>
+									<method>midpoint</method>
+								</PathWrap>
+							</objects>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1169</max_isometric_force>
+					<optimal_fiber_length>0.114</optimal_fiber_length>
+					<tendon_slack_length>0.31</tendon_slack_length>
+					<pennation_angle_at_optimal>0.08726646</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+
+				<Thelen2003Muscle name="vas_lat_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="vas_lat_r-P1">
+									<location> 0.0048 -0.0349 -0.1854</location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="vas_lat_r-P2">
+									<location> 0.0269 -0.0409 -0.2591</location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="vas_lat_r-P5">
+									<location> 0.0408785 -0.0165     0.0223842</location>
+									<body>tibia_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="FRWrapJointr-vas_lat_r-pw">
+									<wrap_object>FRWrapJointr</wrap_object>
+									<method>midpoint</method>
+								</PathWrap>
+							</objects>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1871</max_isometric_force>
+					<optimal_fiber_length>0.084</optimal_fiber_length>
+					<tendon_slack_length>0.157</tendon_slack_length>
+					<pennation_angle_at_optimal>0.08726646</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="med_gas_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="med_gas_r-P1">
+									<location>-0.019   0.0235 -0.3929</location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="med_gas_r-P2">
+									<location>-0.03    0.0258 -0.4022</location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="med_gas_r-P3">
+									<location>0.     0.0053 0.031 </location>
+									<body>calcn_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1558</max_isometric_force>
+					<optimal_fiber_length>0.06</optimal_fiber_length>
+					<tendon_slack_length>0.39</tendon_slack_length>
+					<pennation_angle_at_optimal>0.29670597</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="lat_gas_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="lat_gas_r-P1">
+									<location>-0.022  -0.0272 -0.3946</location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="lat_gas_r-P2">
+									<location>-0.03   -0.0274 -0.4018</location>
+									<body>femur_r</body>
+								</PathPoint>
+								<PathPoint name="lat_gas_r-P3">
+									<location>0.     0.0053 0.031 </location>
+									<body>calcn_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>683</max_isometric_force>
+					<optimal_fiber_length>0.064</optimal_fiber_length>
+					<tendon_slack_length>0.38</tendon_slack_length>
+					<pennation_angle_at_optimal>0.13962634</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="soleus_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="soleus_r-P1">
+									<location>-0.0024 -0.0071 -0.1533</location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="soleus_r-P2">
+									<location>0.     0.0053 0.031 </location>
+									<body>calcn_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>3549</max_isometric_force>
+					<optimal_fiber_length>0.05</optimal_fiber_length>
+					<tendon_slack_length>0.25</tendon_slack_length>
+					<pennation_angle_at_optimal>0.43633231</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				
+				
+				<Thelen2003Muscle name="tib_ant_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="tib_ant_r-P1">
+									<location> 0.0179 -0.0115 -0.1624</location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="tib_ant_r-P2">
+									<location> 0.0329  0.0177 -0.3951</location>
+									<body>tibia_r</body>
+								</PathPoint>
+								<PathPoint name="tib_ant_r-P3">
+									<location>0.1166 0.0305 0.0178</location>
+									<body>calcn_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>905</max_isometric_force>
+					<optimal_fiber_length>0.098</optimal_fiber_length>
+					<tendon_slack_length>0.223</tendon_slack_length>
+					<pennation_angle_at_optimal>0.08726646</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				
+				
+				<Thelen2003Muscle name="semimem_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="semimem_l-P1">
+									<location>-0.1192   0.07151 -0.09747</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="semimem_l-P2">
+									<location>-0.0348  -0.01891 -0.03519</location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="semimem_l-P3">
+									<location>-0.027   -0.01957 -0.04771</location>
+									<body>tibia_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1288</max_isometric_force>
+					<optimal_fiber_length>0.08</optimal_fiber_length>
+					<tendon_slack_length>0.359</tendon_slack_length>
+					<pennation_angle_at_optimal>0.26179939</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="semiten_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="semiten_l-P1">
+									<location>-0.12635  0.06039 -0.10988</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="semiten_l-P2">
+									<location>-0.04203 -0.02277 -0.02859</location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="semiten_l-P3">
+									<location>-0.03322 -0.02288 -0.05282</location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="semiten_l-P4">
+									<location>-0.0113 -0.0245 -0.0746</location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="semiten_l-P5">
+									<location> 0.0027 -0.0193 -0.0956</location>
+									<body>tibia_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>410</max_isometric_force>
+					<optimal_fiber_length>0.201</optimal_fiber_length>
+					<tendon_slack_length>0.2555</tendon_slack_length>
+					<pennation_angle_at_optimal>0.08726646</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="bifemlh_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="bifemlh_l-P1">
+									<location>-0.12596  0.06944 -0.10257</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="bifemlh_l-P2">
+									<location>-0.0301   0.02943 -0.036  </location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="bifemlh_l-P3">
+									<location>-0.0234  0.0343 -0.0563</location>
+									<body>tibia_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>896</max_isometric_force>
+					<optimal_fiber_length>0.109</optimal_fiber_length>
+					<tendon_slack_length>0.326</tendon_slack_length>
+					<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="bifemsh_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="bifemsh_l-P1">
+									<location> 0.005   0.0234 -0.2111</location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="bifemsh_l-P2">
+									<location>-0.0301   0.02943 -0.036  </location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="bifemsh_l-P3">
+									<location>-0.0234  0.0343 -0.0563</location>
+									<body>tibia_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>804</max_isometric_force>
+					<optimal_fiber_length>0.173</optimal_fiber_length>
+					<tendon_slack_length>0.089</tendon_slack_length>
+					<pennation_angle_at_optimal>0.40142573</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				
+				
+				<Thelen2003Muscle name="glut_max2_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="glut_max2_l-P1">
+									<location>-0.1349  0.0563  0.0176</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="glut_max2_l-P2">
+									<location>-0.1376  0.0914 -0.052 </location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="glut_max2_l-P3">
+									<location>-0.0426  0.0293 -0.053 </location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="glut_max2_l-P4">
+									<location>-0.0156  0.0419 -0.1016</location>
+									<body>femur_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>819</max_isometric_force>
+					<optimal_fiber_length>0.147</optimal_fiber_length>
+					<tendon_slack_length>0.127</tendon_slack_length>
+					<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				
+				<Thelen2003Muscle name="iliacus_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="iliacus_l-P1">
+									<location>-0.0674  0.0854  0.0365</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="iliacus_l-P2">
+									<location>-0.0258  0.0811 -0.055 </location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="iliacus_l-P3">
+									<location>-0.0288  0.0816 -0.0805</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="iliacus_l-P4">
+									<location> 0.0017  0.0057 -0.0543</location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="iliacus_l-P5">
+									<location>-0.0193  0.0129 -0.0621</location>
+									<body>femur_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1073</max_isometric_force>
+					<optimal_fiber_length>0.1</optimal_fiber_length>
+					<tendon_slack_length>0.1</tendon_slack_length>
+					<pennation_angle_at_optimal>0.12217305</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				
+				
+				<Thelen2003Muscle name="gem_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="gem_l-P1">
+									<location>-0.1133  0.0714 -0.082 </location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="gem_l-P2">
+									<location>-0.0142  0.0443 -0.0033</location>
+									<body>femur_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>164</max_isometric_force>
+					<optimal_fiber_length>0.024</optimal_fiber_length>
+					<tendon_slack_length>0.039</tendon_slack_length>
+					<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<!--
+				<Thelen2003Muscle name="peri_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="peri_l-P1">
+									<location>-0.1396  0.0235  0.0003</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="peri_l-P2">
+									<location>-0.1193  0.0657 -0.0276</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="peri_l-P3">
+									<location>-0.0148  0.0437 -0.0036</location>
+									<body>femur_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>444</max_isometric_force>
+					<optimal_fiber_length>0.026</optimal_fiber_length>
+					<tendon_slack_length>0.115</tendon_slack_length>
+					<pennation_angle_at_optimal>0.17453293</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+			-->
+				<Thelen2003Muscle name="rect_fem_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="rect_fem_l-P1">
+									<location>-0.0295  0.0968 -0.0311</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="rect_fem_l-P3">
+									<location>0.0422074 0.0014    0.0242373</location>
+									<body>tibia_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="FRWrapJointl-rect_fem_l-pw">
+									<wrap_object>FRWrapJointl</wrap_object>
+									<method>midpoint</method>
+								</PathWrap>
+							</objects>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1169</max_isometric_force>
+					<optimal_fiber_length>0.114</optimal_fiber_length>
+					<tendon_slack_length>0.31</tendon_slack_length>
+					<pennation_angle_at_optimal>0.08726646</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				
+				<Thelen2003Muscle name="vas_lat_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="vas_lat_l-P1">
+									<location> 0.0048  0.0349 -0.1854</location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="vas_lat_l-P2">
+									<location> 0.0269  0.0409 -0.2591</location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="vas_lat_l-P5">
+									<location>0.0408785 0.0165    0.0223842</location>
+									<body>tibia_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="FRWrapJointl-vas_lat_l-pw">
+									<wrap_object>FRWrapJointl</wrap_object>
+									<method>midpoint</method>
+								</PathWrap>
+							</objects>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1871</max_isometric_force>
+					<optimal_fiber_length>0.084</optimal_fiber_length>
+					<tendon_slack_length>0.157</tendon_slack_length>
+					<pennation_angle_at_optimal>0.08726646</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="med_gas_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="med_gas_l-P1">
+									<location>-0.019  -0.0235 -0.3929</location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="med_gas_l-P2">
+									<location>-0.03   -0.0258 -0.4022</location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="med_gas_l-P3">
+									<location> 0.     -0.0053  0.031 </location>
+									<body>calcn_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>1558</max_isometric_force>
+					<optimal_fiber_length>0.06</optimal_fiber_length>
+					<tendon_slack_length>0.39</tendon_slack_length>
+					<pennation_angle_at_optimal>0.29670597</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="lat_gas_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="lat_gas_l-P1">
+									<location>-0.022   0.0272 -0.3946</location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="lat_gas_l-P2">
+									<location>-0.03    0.0274 -0.4018</location>
+									<body>femur_l</body>
+								</PathPoint>
+								<PathPoint name="lat_gas_l-P3">
+									<location> 0.     -0.0053  0.031 </location>
+									<body>calcn_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>683</max_isometric_force>
+					<optimal_fiber_length>0.064</optimal_fiber_length>
+					<tendon_slack_length>0.38</tendon_slack_length>
+					<pennation_angle_at_optimal>0.13962634</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="soleus_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="soleus_l-P1">
+									<location>-0.0024  0.0071 -0.1533</location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="soleus_l-P2">
+									<location> 0.     -0.0053  0.031 </location>
+									<body>calcn_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>3549</max_isometric_force>
+					<optimal_fiber_length>0.05</optimal_fiber_length>
+					<tendon_slack_length>0.25</tendon_slack_length>
+					<pennation_angle_at_optimal>0.43633231</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+			
+				
+				<Thelen2003Muscle name="tib_ant_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="tib_ant_l-P1">
+									<location> 0.0179  0.0115 -0.1624</location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="tib_ant_l-P2">
+									<location> 0.0329 -0.0177 -0.3951</location>
+									<body>tibia_l</body>
+								</PathPoint>
+								<PathPoint name="tib_ant_l-P3">
+									<location> 0.1166 -0.0305  0.0178</location>
+									<body>calcn_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>905</max_isometric_force>
+					<optimal_fiber_length>0.098</optimal_fiber_length>
+					<tendon_slack_length>0.223</tendon_slack_length>
+					<pennation_angle_at_optimal>0.08726646</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+
+			</objects>
+		</ForceSet>
+	</Model>
+</OpenSimDocument>

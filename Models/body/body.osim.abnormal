@@ -1,0 +1,150 @@
+<?xml version="1.0" ?>
+<OpenSimDocument Version="20303">
+	<Model>
+		<BodySet>
+			<objects>
+				<Body name="femur_r">
+					<WrapObjectSet name="">
+						<objects>
+							<WrapCylinder name="FRWrapJointr">
+								<xyz_body_rotation>1.57 0 0</xyz_body_rotation>
+								<translation>0 0 -0.403</translation>
+								<radius>0.036</radius>
+								<length>0.5</length>
+								<quadrant>+x</quadrant>
+								<active>true</active>
+							</WrapCylinder>
+						</objects>
+						<groups/>
+					</WrapObjectSet>
+				</Body>
+				<Body name="femur_l">
+					<WrapObjectSet name="">
+						<objects>
+							<WrapCylinder name="FRWrapJointl">
+								<xyz_body_rotation>1.57 0 0</xyz_body_rotation>
+								<translation>0 0 0.403</translation>
+								<radius>0.036</radius>
+								<length>0.5</length>
+								<quadrant>+x</quadrant>
+								<active>true</active>
+							</WrapCylinder>
+						</objects>
+						<groups/>
+					</WrapObjectSet>
+				</Body>
+			</objects>
+		</BodySet>
+		<ForceSet>
+			<objects>
+
+				<Thelen2003Muscle name="peri_r">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="peri_r-P1">
+									<location>-0.1396 -0.0235  0.0003</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="peri_r-P2">
+									<location>-0.1193 -0.0657 -0.0276</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="peri_r-P3">
+									<location>-0.0148 -0.0437 -0.0036</location>
+									<body>femur_r</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>444</max_isometric_force>
+					<optimal_fiber_length>0.026</optimal_fiber_length>
+					<tendon_slack_length>0.115</tendon_slack_length>
+					<pennation_angle_at_optimal>0.17453293</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+
+				<Thelen2003Muscle name="peri_l">
+					<isDisabled>false</isDisabled>
+					<min_control>0</min_control>
+					<max_control>1</max_control>
+					<GeometryPath>
+						<PathPointSet>
+							<objects>
+								<PathPoint name="peri_l-P1">
+									<location>-0.1396  0.0235  0.0003</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="peri_l-P2">
+									<location>-0.1193  0.0657 -0.0276</location>
+									<body>pelvis</body>
+								</PathPoint>
+								<PathPoint name="peri_l-P3">
+									<location>-0.0148  0.0437 -0.0036</location>
+									<body>femur_l</body>
+								</PathPoint>
+							</objects>
+							<groups/>
+						</PathPointSet>
+						<VisibleObject>
+							<GeometrySet>
+								<objects/>
+								<groups/>
+							</GeometrySet>
+							<scale_factors> 1 1 1</scale_factors>
+							<transform> -0 0 -0 0 0 0</transform>
+							<show_axes>false</show_axes>
+							<display_preference>4</display_preference>
+						</VisibleObject>
+						<PathWrapSet>
+							<objects/>
+							<groups/>
+						</PathWrapSet>
+					</GeometryPath>
+					<optimal_force>1</optimal_force>
+					<max_isometric_force>444</max_isometric_force>
+					<optimal_fiber_length>0.026</optimal_fiber_length>
+					<tendon_slack_length>0.115</tendon_slack_length>
+					<pennation_angle_at_optimal>0.17453293</pennation_angle_at_optimal>
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<activation_time_constant>0.01</activation_time_constant>
+					<deactivation_time_constant>0.04</deactivation_time_constant>
+					<FmaxTendonStrain>0.033</FmaxTendonStrain>
+					<FmaxMuscleStrain>0.6</FmaxMuscleStrain>
+					<KshapeActive>0.5</KshapeActive>
+					<KshapePassive>4</KshapePassive>
+					<Af>0.3</Af>
+					<Flen>1.8</Flen>
+				</Thelen2003Muscle>
+			
+			</objects>
+		</ForceSet>
+	</Model>
+</OpenSimDocument>
