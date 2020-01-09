@@ -1,6 +1,6 @@
 CONFIGURATION = {}
 
-import rospy` 
+import rospy
 rospy.wait_for_service("/gazebo/get_joint_properties")
 rospy.wait_for_service("/gazebo/get_link_properties")
 rospy.wait_for_service("/gazebo/get_link_state")
@@ -8,7 +8,6 @@ rospy.wait_for_service("/gazebo/get_link_state")
 @nrp.MapVariable("conf",initial_value=CONFIGURATION)
 @nrp.MapVariable("observation",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("reward_",initial_value=None,scope=nrp.GLOBAL)
-@nrp.MapVariable("Height",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("ActiBelt_Data",initial_value=None,scope=nrp.GLOBAL)
 
 @nrp.MapVariable("pos_x",initial_value=None,scope=nrp.GLOBAL)
@@ -28,7 +27,7 @@ def environment(t, conf, observation, reward_, pos_x, pos_z, vel_x, vel_z, ActiB
 	import rospy
 	import numpy as np
 	joints = ["hip_r","hip_l","knee_r","knee_l","ankle_r","ankle_l"]
-	links = ["pelvis","torso","femur_r","femur_l","tibia_l","tibia_r","talus_r","talus_l","toes_r","toes_l","ActiBelt"]
+	links = ["pelvis","torso","femur_r","femur_l","tibia_l","tibia_r","talus_r","talus_l","toes_r","toes_l"]
 	if GetJointPropertiesSrv.value is None:
 		from gazebo_msgs.srv import GetJointProperties
 		GetJointPropertiesSrv.value = rospy.ServiceProxy("/gazebo/get_joint_properties", GetJointProperties)
@@ -79,26 +78,26 @@ def environment(t, conf, observation, reward_, pos_x, pos_z, vel_x, vel_z, ActiB
 		link_vlin.append(resp.link_state.twist.linear)
 		link_vang.append(resp.link_state.twist.angular)
 
-	ActiBelt_Data.value = [link_pos.pop(),link_ori.pop(),link_vlin.pop(),link_vang.pop()]
+	#ActiBelt_Data.value = [link_pos.pop(),link_ori.pop(),link_vlin.pop(),link_vang.pop()]
 
 	#get observation
-	observation.value = []
+	observation_ = []
 
 	#pelvis pos 7
-	observation.value += [link_pos[0].x,link_pos[0].y,link_pos[0].z,link_ori[0].x,link_ori[0].y,link_ori[0].z,link_ori[0].w]
+	observation_ += [link_pos[0].x,link_pos[0].y,link_pos[0].z,link_ori[0].x,link_ori[0].y,link_ori[0].z,link_ori[0].w]
 	pos_z.value = link_pos[0].z
 	pos_x.value = link_pos[0].x
 
 	#pelvis vel 6
-	observation.value += [link_vlin[0].x,link_vlin[0].y,link_vlin[0].z,link_vang[0].x,link_vang[0].y,link_vang[0].z]
+	observation_ += [link_vlin[0].x,link_vlin[0].y,link_vlin[0].z,link_vang[0].x,link_vang[0].y,link_vang[0].z]
 	vel_x.value = link_vlin[0].x
 	vel_z.value = link_vlin[0].z
 
 	#joint pos 6
-	observation.value += joint_pos
+	observation_ += joint_pos
 
 	#joint vel 6
-	observation.value += joint_vel
+	observation_ += joint_vel
 
 	#pos,vel center of mass 6
 	pos_cog = np.zeros(3)
@@ -110,12 +109,12 @@ def environment(t, conf, observation, reward_, pos_x, pos_z, vel_x, vel_z, ActiB
 	pos_cog /= sum(link_mass.value)
 	vel_cog /= sum(link_mass.value)
 
-	observation.value = observation.value + list(pos_cog) + list(vel_cog)
+	observation_ = observation_ + list(pos_cog) + list(vel_cog)
 
 	#other link pos 27
 	link_pos.pop(0)
 	for pos in link_pos:
-		observation.value += [pos.x,pos.y,pos.z]
+		observation_ += [pos.x,pos.y,pos.z]
 
 
 	reward = eval(conf.value.get('Environment',{}).get('reward_function',"np.clip(3*link_vlin[0].x-abs(link_vlin[0].y)-1*abs(link_vlin[0].z)+1,-50,50)"))
@@ -123,3 +122,4 @@ def environment(t, conf, observation, reward_, pos_x, pos_z, vel_x, vel_z, ActiB
 	#clientLogger.info(conf.value.get('NAME',"Not specified"))
 	#reward is further rudeced by the sum of muscle activation
 	reward_.value = reward
+	observation.value = observation_

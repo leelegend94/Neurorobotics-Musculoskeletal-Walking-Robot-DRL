@@ -11,12 +11,7 @@ def init_DRLagent(t, agent, conf):
         # import keras-rl in NRP through virtual env
         import site, os
         site.addsitedir(os.path.expanduser('~/.opt/tensorflow1_venv/lib/python2.7/site-packages'))
-        #import tensorflow as tf
-        '''
-        from tensorflow.keras import Model, Sequential, Input
-        from tensorflow.keras.layers import Dense, Activation, Flatten,concatenate
-        from keras.optimizers import Adam
-        '''
+
         from keras.models import Model, Sequential
         from keras.layers import Dense, Activation, Flatten, Input, concatenate
         from keras.optimizers import Adam
@@ -61,9 +56,9 @@ def init_DRLagent(t, agent, conf):
         #actor.add(Activation('relu'))
         #actor.add(Dense(nA))
         #actor.add(Activation('sigmoid'))
-
+        clientLogger.info("Actor Network Structure:")
         for layer in actor_layers:
-            clientLogger.info(layer[0])
+            clientLogger.info(layer[0],)
             actor.add(Dense(layer[0],activation=layer[1],kernel_initializer='RandomNormal'))
         actor.add(Dense(nA,activation=actor_act,kernel_initializer='RandomNormal'))
 
