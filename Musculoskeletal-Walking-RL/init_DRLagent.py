@@ -10,7 +10,7 @@ def init_DRLagent(t, agent, conf):
     if agent.value is None:
         # import keras-rl in NRP through virtual env
         import site, os
-        site.addsitedir(os.path.expanduser('~/.opt/tensorflow1_venv/lib/python2.7/site-packages'))
+        site.addsitedir(os.path.expanduser('~/.opt/tensorflow_venv/lib/python2.7/site-packages'))
 
         from keras.models import Model, Sequential
         from keras.layers import Dense, Activation, Flatten, Input, concatenate
@@ -104,12 +104,42 @@ def init_DRLagent(t, agent, conf):
         conf_name = conf.value.get('NAME','default')
         ###
         weights_list = os.listdir(os.path.expanduser(WeightsPATH))
-        weights_list = list(filter(lambda x: x.endswith('h5'), weights_list))
-        weights_list_without_timestamp = list(lambda x: x.split("_")[2:].join("_"), weights_list)
+
+        #ensure weights in the list contain timestamp, only works before 2100 :)
+        weights_list = list(filter(lambda x: x.endswith('h5') and x.startswith("20"), weights_list))
+        weights_list_without_timestamp = [x[17:] for x in weights_list]
+        weights_list_timestamp = [x[:16] for x in weights_list]
+
+        actor_name = conf_name+"_ddpg_weights_actor.h5"
+        #critic_name = conf_name+"_ddpg_weights_critic.h5"
+
+        idx_ts_actor = [i for i,x in enumerate(weights_list_without_timestamp) if x==actor_name]
+        #idx_ts_critic = [i for i,x in enumerate(weights_list_without_timestamp) if x==critic_name]
+
+        name = conf_name+"_ddpg_weights.h5"
+        #weights are actually stored with "_actor" or "_critic" suffixes.
+
+        if len(idx_ts_actor)==0:
+            clientLogger.info(actor_name+'not availiable. Freash training.')
+            return
+        elif len(idx_ts_actor)==1:
+            pass
+        else:
+            clientLogger.info("Multiple weights file matched, choose the latest one.")
+            import time, datetime
+            timestamp = [time.mktime(datetime.datetime.strptime(x, "%Y-%m-%d-%H-%M-%S").timetuple()) for x in weights_list_timestamp]
+            idx_ts_actor = timestamp.index(max(timestamp))
+
+        full_name = weights_list_timestamp[idx_ts_actor]+"_"+name
+        agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
+        clientLogger.info("Weights file: ",full_name," loaded!")
+
+
         ###
-        if os.path.isfile(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights_actor.h5")):
-            agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights.h5"))
-            clientLogger.info('weights loaded!')
+
+        #if os.path.isfile(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights_actor.h5")):
+        #    agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights.h5"))
+        #    clientLogger.info('weights loaded!')
         
         #agent_.compile(optimizer=Adam(lr=.001, clipnorm=1.),metrics=['mae'])
         #agent_.compile(Adam(lr=.001, clipnorm=1.), metrics=['mae'])

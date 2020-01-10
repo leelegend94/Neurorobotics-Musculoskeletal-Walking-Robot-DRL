@@ -82,8 +82,10 @@ def controller(t, agent, conf, observation, MAX_ITR, reward, reward_, nb_ep, nb_
 				import os
 				WeightsPATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
 				conf_name = conf.value.get('NAME','default')
-				agent.value.save_weights(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights.h5"), overwrite=True)
-				clientLogger.info('weights saved')
+				time_stamp = conf.value.get('START_TIME_STAMP','20xx-yy-dd-hh-mm-ss')
+				full_name = time_stamp+"_"+conf_name+"_ddpg_weights.h5"
+				agent.value.save_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
+				clientLogger.info('weights saved in ', full_name, " (with extra suffix)")
 			nb_itr.value = nb_itr.value + 1
 		else:
 			clientLogger.info(str(observation.value[2]))

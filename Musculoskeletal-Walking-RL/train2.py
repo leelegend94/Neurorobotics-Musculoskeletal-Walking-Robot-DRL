@@ -19,11 +19,13 @@ def sim_start(experiment,server,config_file_path,results_save_path):
 	#load configurations from .yaml file into a python dictionary
 	config = yaml.load(open(config_file_path))
 	filename = config_file_path.split("/")[-1]
-	config['NAME'] = filename[:-5]
+	time_stamp = str(datetime.date.today())+"-"+time.strftime("%H-%M-%S")
 
-	time_stamp = str(datetime.date.today())+"-"+time.strftime("%H-%M")
+	config['NAME'] = filename[:-5]
+	config['START_TIME_STAMP'] = time_stamp
+	
 	WeightsPATH = config.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
-	f = open(os.path.expanduser(WeightsPATH+"/"+time_stamp+"__init__"+filename),'w')
+	f = open(os.path.expanduser(WeightsPATH+"/"+time_stamp+filename),'w')
 	yaml.dump(config,f)
 
 	tf_environment = sim.get_transfer_function('environment').splitlines()
