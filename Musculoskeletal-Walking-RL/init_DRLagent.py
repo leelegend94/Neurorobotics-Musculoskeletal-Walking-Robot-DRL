@@ -99,9 +99,14 @@ def init_DRLagent(t, agent, conf):
         
         #Why this strange path? --> cf. "https://github.com/keras-rl/keras-rl/blob/master/rl/agents/ddpg.py" line 158-171
         WeightsPATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
-        clientLogger.info(WeightsPATH)
-        clientLogger.info(conf.value)
+        #clientLogger.info(WeightsPATH)
+        #clientLogger.info(conf.value)
         conf_name = conf.value.get('NAME','default')
+        ###
+        weights_list = os.listdir(os.path.expanduser(WeightsPATH))
+        weights_list = list(filter(lambda x: x.endswith('h5'), weights_list))
+        weights_list_without_timestamp = list(lambda x: x.split("_")[2:].join("_"), weights_list)
+        ###
         if os.path.isfile(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights_actor.h5")):
             agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights.h5"))
             clientLogger.info('weights loaded!')

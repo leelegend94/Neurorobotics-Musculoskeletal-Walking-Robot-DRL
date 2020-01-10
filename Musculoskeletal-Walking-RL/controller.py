@@ -69,7 +69,7 @@ def controller(t, agent, conf, observation, MAX_ITR, reward, reward_, nb_ep, nb_
 				muscle.send_message(std_msgs.msg.Float64(action[idx]))
 
 			#learn from the raeward
-			reward.value = reward_.value-sum(action)/10
+			reward.value = reward_.value-sum(action)/24
 			agent.value.backward(reward.value)
 			agent.value.step = agent.value.step + 1
 
