@@ -1,6 +1,6 @@
 import time
 import pandas as pd
-import time
+import time,datetime
 import sys,os
 import yaml
 import argparse
@@ -18,33 +18,46 @@ def sim_start(experiment,server,config_file_path,results_save_path):
 
 	#load configurations from .yaml file into a python dictionary
 	config = yaml.load(open(config_file_path))
+	filename = config_file_path.split("/")[-1]
+	config['NAME'] = filename[:-5]
+
+	time_stamp = str(datetime.date.today())+"-"+time.strftime("%H-%M")
+	WeightsPATH = config.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
+	f = open(os.path.expanduser(WeightsPATH+"/"+time_stamp+"__init__"+filename),'w')
+	yaml.dump(config,f)
 
 	tf_environment = sim.get_transfer_function('environment').splitlines()
 	tf_ddpg = sim.get_transfer_function('init_DRLagent').splitlines()
 	tf_controller = sim.get_transfer_function('controller').splitlines()
+	tf_history = sim.get_transfer_function('history_recorder').splitlines()
 
 	#Substritue the first line of the transfer function with the configuration dict..
 	tf_environment[0] = "CONFIGURATION = " + str(config)
 	tf_ddpg[0] = "CONFIGURATION = " + str(config)
 	tf_controller[0] = "CONFIGURATION = " + str(config)
-
+	tf_history[0] = "CONFIGURATION = " + str(config)
 
 	tf_environment = "\n".join(tf_environment)
 	tf_ddpg = "\n".join(tf_ddpg)
 	tf_controller = "\n".join(tf_controller)
+	tf_history = "\n".join(tf_history)
 
 	sim.edit_transfer_function('environment',tf_environment)
 	sim.edit_transfer_function('init_DRLagent',tf_ddpg)
 	sim.edit_transfer_function('controller',tf_controller)
+	sim.edit_transfer_function('history_recorder',tf_history)
 	
 	MAX_EP = config.get('Training',{}).get('Max_Epoch',300)
 	sim.start()
+	time.sleep(5)
+	#wait until that csv file is created.
 	ep_idx = 0
+	hist_file_name = "history_" + config.get('NAME','default') + ".csv"
 	while(ep_idx <= MAX_EP):
 	#terminate the simulation when it reaches maximum epochs.
 		time.sleep(0.25)
 		#retrive current states from csv file
-		csv_curr_stat = sim.get_last_run_csv_file('curr_stat.csv')
+		csv_curr_stat = sim.get_last_run_csv_file(hist_file_name)
 		lst_line = csv_curr_stat.splitlines()[-1].split(',') #last line of the csv, namely the newest states.
 		if lst_line[0] != "Epoch": #avoiding the case that the csv file contains only the header.
 			print lst_line
