@@ -8,7 +8,6 @@ rospy.wait_for_service("/gazebo/get_link_state")
 @nrp.MapVariable("conf",initial_value=CONFIGURATION)
 @nrp.MapVariable("observation",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("reward_",initial_value=None,scope=nrp.GLOBAL)
-@nrp.MapVariable("ActiBelt_Data",initial_value=None,scope=nrp.GLOBAL)
 
 @nrp.MapVariable("pos_x",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("pos_z",initial_value=None,scope=nrp.GLOBAL)
@@ -23,7 +22,7 @@ rospy.wait_for_service("/gazebo/get_link_state")
 @nrp.MapVariable("link_mass",initial_value=None)
 
 @nrp.Robot2Neuron()
-def environment(t, conf, observation, reward_, pos_x, pos_z, vel_x, vel_z, ActiBelt_Data, link_mass, GetJointPropertiesSrv,GetLinkPropertiesSrv,GetLinkStateSrv):
+def environment(t, conf, observation, reward_, pos_x, pos_z, vel_x, vel_z, link_mass, GetJointPropertiesSrv,GetLinkPropertiesSrv,GetLinkStateSrv):
 	import rospy
 	import numpy as np
 	joints = ["hip_r","hip_l","knee_r","knee_l","ankle_r","ankle_l"]

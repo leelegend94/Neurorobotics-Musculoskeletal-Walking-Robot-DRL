@@ -1,11 +1,23 @@
-@nrp.MapCSVRecorder("recorder", filename="actibelt.csv", headers=["index","acceleration","lin_vel_x","lin_vel_y","lin_vel_z","ang_vel_x","ang_vel_y","ang_vel_z"])
-#@nrp.MapCSVRecorder("recorder", filename="curr_stat.csv", headers=["itr_idx","dummy"])
-@nrp.MapVariable("ActiBelt_Data",initial_value=None,scope=nrp.GLOBAL)
-@nrp.MapVariable("agent", initial_value=None, scope=nrp.GLOBAL)
+@nrp.MapCSVRecorder("recorder", filename="actibelt.csv", headers=["time_stamp","lin_acc_x","lin_acc_y","lin_acc_z","ang_vel_x","ang_vel_y","ang_vel_z","quat_x","quat_y","quat_z","quat_w"])
+
+@nrp.MapVariable("logger", initial_value=None)
+@nrp.MapVariable("sub", initial_value=None)
+@nrp.MapVariable("reward", initial_value=None, scope=nrp.GLOBAL)
+
 @nrp.Robot2Neuron()
-def csv_curr_stat(t, recorder, ActiBelt_Data, agent):
-	if agent.value is not None and ActiBelt_Data.value is not None:
-		data = ActiBelt_Data.value
-		recorder.record_entry(agent.value.step,"None",data[2].x,data[2].y,data[2].z,data[3].x,data[3].y,data[3].z)
-		#recorder.record_entry(agent.value.step,"1")
-		clientLogger.info('Data Recorded')
+def actibelt_recorder(t, recorder, logger, reward, sub):
+	if logger.value is None:
+		import site, os
+		import rospy
+		from sensor_msgs.msg import Imu
+		site.addsitedir(os.path.expanduser('~/Documents/Musculoskeletal-Walking-RL/Musculoskeletal-Walking-RL'))
+		from ActiBelt_Logger import ActiBelt_Logger
+		logger.value = ActiBelt_Logger()
+		sub.value = rospy.Subscriber("/body/ActiBelt",Imu,logger.value.record)
+
+	if reward.value is not None:
+		result = logger.value.get_data()
+		if result is not None:
+			[ts,ax,ay,az,wx,wy,wz,qx,qy,qz,qw] = result
+			recorder.record_entry(ts,ax,ay,az,wx,wy,wz,qx,qy,qz,qw)
+			clientLogger.info('acti data Recorded')

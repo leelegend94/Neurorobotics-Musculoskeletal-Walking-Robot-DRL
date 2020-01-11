@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 from multiprocessing import Process
 from hbp_nrp_virtual_coach.virtual_coach import VirtualCoach
 
-#TODO 1. actibelt logging tf   2.eval   3. remove nrp panel
+#TODO 2.eval
 
-def sim_start(experiment,server,config_file_path,results_save_path):
+def sim_start(experiment,server,config_file_path):
 	global vc	
 	sim = vc.launch_experiment(experiment)
 	print "Configuring..."
@@ -25,7 +25,7 @@ def sim_start(experiment,server,config_file_path,results_save_path):
 	config['START_TIME_STAMP'] = time_stamp
 	
 	WeightsPATH = config.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
-	f = open(os.path.expanduser(WeightsPATH+"/"+time_stamp+filename),'w')
+	f = open(os.path.expanduser(WeightsPATH+"/"+time_stamp+"_"+filename),'w')
 	yaml.dump(config,f)
 
 	tf_environment = sim.get_transfer_function('environment').splitlines()
@@ -70,7 +70,8 @@ def sim_start(experiment,server,config_file_path,results_save_path):
 	sim.stop()
 
 
-def main(experiment,config_path,results_save_path,environment,storage_username,storage_password):
+def main(experiment,config_path,environment,storage_username,storage_password):
+#def main(**kwargs):
 	vc = VirtualCoach(environment=environment, storage_username=storage_username, storage_password=storage_password)
 	global vc
 	vc.print_cloned_experiments()
@@ -87,7 +88,7 @@ def main(experiment,config_path,results_save_path,environment,storage_username,s
 	#list of configuration files 
 	configurations = os.listdir(config_path)
 	configurations = list(filter(lambda x: x.endswith('yaml'), configurations)) #only yaml file should be in the list
-
+	workers = []
 	while True:
 		if len(configurations) > 0:
 		#check whether there is configuration not being simulated yet.
@@ -100,8 +101,9 @@ def main(experiment,config_path,results_save_path,environment,storage_username,s
 
 				#sim_start(experiment,server,curr_config_path,results_save_path)
 				#create a new process to run the simulation
-				p = Process(target=sim_start, args=(experiment,server,curr_config_path,results_save_path))
+				p = Process(target=sim_start, args=(experiment,server,curr_config_path))
 				p.start()
+				workers.append(p)
 			else:
 				print len(configurations)," configurations in queue. Waiting for available server"
 				while vc.print_available_servers()[0] == "No available servers.":
@@ -109,22 +111,32 @@ def main(experiment,config_path,results_save_path,environment,storage_username,s
 				servers = vc.print_available_servers()
 		else:
 			break
-	p.join()
-	print "Training Complete!"
+	try:
+		for w in workers:
+			w.join()
+		print "Training Complete!"
+	except:
+		print "Exception received, terminate."
+		for w in workers:
+			w.terminate()
+			w.join()
+	
 	#evaluate(results_save_path)
 
 
 #----------------------------------------------------------------------#
 parser = argparse.ArgumentParser(description='Parallel training script.')
-parser.add_argument('--experiment','-x',help='name of the experiment to be launched. default: Neurorobotics-Musculoskeletal-Walking-Robot-DRL_0', default='Neurorobotics-Musculoskeletal-Walking-Robot-DRL_0')
-parser.add_argument('--config_path','-c',help='path to configuration files. default: ./simulation_config',default='./simulation_config')
-parser.add_argument('--results_path','-r',help='path to simulatuion results. default: ./results', default='./results')
+parser.add_argument('--experiment','-x',help='name of the experiment to be launched. default: Musculoskeletal-Walking-RL', default='Musculoskeletal-Walking-RL')
+parser.add_argument('--config_path','-c',help='path to configuration files. default: ../Musculoskeletal-Walking-RL/simulation_config',default='../Musculoskeletal-Walking-RL/simulation_config')
+#parser.add_argument('--results_path','-r',help='path to simulatuion results. default: ../Musculoskeletal-Walking-RL/results', default='../Musculoskeletal-Walking-RL/results')
 parser.add_argument('--environment','-e',help='environment of NRP backend. default: local', default='local')
-parser.add_argument('--storage_username','-n',help='NRP storage user name. default: nrpuser', default='nrpuser')
-parser.add_argument('--storage_password','-p',help='NRP storage password. default: password', default='password')
+parser.add_argument('--storage_username',help='NRP storage user name. default: nrpuser', default='nrpuser')
+parser.add_argument('--storage_password',help='NRP storage password. default: password', default='password')
 args = parser.parse_args()
 
 if __name__ == "__main__":
 	if args.config_path[-1] == '/':
 		args.config_path = args.config_path[:,-1]
-	main(args.experiment,args.config_path,args.results_path,args.environment,args.storage_username,args.storage_password)
+	main(args.experiment, args.config_path, args.environment, args.storage_username, args.storage_password)
+
+

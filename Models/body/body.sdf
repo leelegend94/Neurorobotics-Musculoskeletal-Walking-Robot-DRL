@@ -728,7 +728,7 @@
 			<topicName>ActiBelt</topicName>
 			<bodyName>ActiBelt_link</bodyName>
 			<alwaysOn>true</alwaysOn>
-			<updateRate>10</updateRate>
+			<updateRate>100</updateRate>
 		</plugin>
 		<!--============================== Muscles ===================================-->
 		<muscles>model://body/body.osim</muscles>

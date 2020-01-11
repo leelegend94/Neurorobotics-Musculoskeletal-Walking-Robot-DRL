@@ -3,10 +3,11 @@ CONFIGURATION = {}
 # internal keras-rl agent to persist
 @nrp.MapVariable("agent", initial_value=None, scope=nrp.GLOBAL)
 @nrp.MapVariable("conf",initial_value=CONFIGURATION)
-
+#@nrp.MapVariable("tmp",initial_value=None)
 @nrp.Robot2Neuron()
 def init_DRLagent(t, agent, conf):
     # initialize the keras-rl agent
+    #clientLogger.info(tmp.value)
     if agent.value is None:
         # import keras-rl in NRP through virtual env
         import site, os
@@ -48,14 +49,6 @@ def init_DRLagent(t, agent, conf):
         actor = Sequential()
         actor.add(Flatten(input_shape=(1,nS)))
 
-        #actor.add(Dense(128))
-        #actor.add(Activation('relu'))
-        #actor.add(Dense(128))
-        #actor.add(Activation('relu'))
-        #actor.add(Dense(128))
-        #actor.add(Activation('relu'))
-        #actor.add(Dense(nA))
-        #actor.add(Activation('sigmoid'))
         clientLogger.info("Actor Network Structure:")
         for layer in actor_layers:
             clientLogger.info(layer[0],)
@@ -67,15 +60,6 @@ def init_DRLagent(t, agent, conf):
         observation_input = Input(shape=(1,) + (nS,), name='observation_input')
         flattened_observation = Flatten()(observation_input)
         x = concatenate([action_input, flattened_observation])
-
-        #x = Dense(512)(x)
-        #x = Activation('relu')(x)
-        #x = Dense(256)(x)
-        #x = Activation('relu')(x)
-        #x = Dense(128)(x)
-        #x = Activation('relu')(x)
-        #x = Dense(1)(x)
-        #x = Activation('linear')(x)
         
         for layer in critic_layers:
             clientLogger.info(layer[0])
@@ -102,6 +86,7 @@ def init_DRLagent(t, agent, conf):
         #clientLogger.info(WeightsPATH)
         #clientLogger.info(conf.value)
         conf_name = conf.value.get('NAME','default')
+
         ###
         weights_list = os.listdir(os.path.expanduser(WeightsPATH))
 
@@ -120,30 +105,23 @@ def init_DRLagent(t, agent, conf):
         #weights are actually stored with "_actor" or "_critic" suffixes.
 
         if len(idx_ts_actor)==0:
-            clientLogger.info(actor_name+'not availiable. Freash training.')
-            return
+            clientLogger.info(actor_name+' not availiable. Freash training.')
+            #time_stamp = conf.value.get('START_TIME_STAMP','20xx-yy-dd-hh-mm-ss')
+            #full_name = time_stamp+"_"+name
         elif len(idx_ts_actor)==1:
-            pass
+            full_name = weights_list_timestamp[idx_ts_actor]+"_"+name
+            agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
+            clientLogger.info("Weights file: ",full_name," loaded!")
         else:
             clientLogger.info("Multiple weights file matched, choose the latest one.")
             import time, datetime
             timestamp = [time.mktime(datetime.datetime.strptime(x, "%Y-%m-%d-%H-%M-%S").timetuple()) for x in weights_list_timestamp]
             idx_ts_actor = timestamp.index(max(timestamp))
+            full_name = weights_list_timestamp[idx_ts_actor]+"_"+name
+            agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
+            clientLogger.info("Weights file: ",full_name," loaded!")
 
-        full_name = weights_list_timestamp[idx_ts_actor]+"_"+name
-        agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
-        clientLogger.info("Weights file: ",full_name," loaded!")
-
-
-        ###
-
-        #if os.path.isfile(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights_actor.h5")):
-        #    agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+conf_name+"_ddpg_weights.h5"))
-        #    clientLogger.info('weights loaded!')
-        
-        #agent_.compile(optimizer=Adam(lr=.001, clipnorm=1.),metrics=['mae'])
-        #agent_.compile(Adam(lr=.001, clipnorm=1.), metrics=['mae'])
-        #agent_.compile('adam', metrics=['mae'])
+        #tmp.value = full_name
 
         agent.value = agent_
         clientLogger.info('***********************')
