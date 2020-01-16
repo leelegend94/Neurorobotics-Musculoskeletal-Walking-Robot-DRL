@@ -63,8 +63,8 @@ DDPG_Agent:
 
 Environment:
   reward_function:
-    np.clip(5*link_vlin[0].x-abs(link_vlin[0].y)-2*abs(link_vlin[0].z)+1,-50,50)
+    np.clip(3*link_vlin[0].x-abs(link_vlin[0].y)-2*abs(link_vlin[0].z)+1,-50,50)
 
 Training:   
-  Max_Epoch: 300
+  Max_Epoch: 1000
   Max_Iteration_per_Epoch: 200

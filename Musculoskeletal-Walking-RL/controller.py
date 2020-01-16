@@ -9,7 +9,7 @@ from std_msgs.msg import Float64
 
 @nrp.MapVariable("agent", initial_value=None, scope=nrp.GLOBAL)
 @nrp.MapVariable("observation",initial_value=None,scope=nrp.GLOBAL)
-@nrp.MapVariable("reward_",initial_value=None,scope=nrp.GLOBAL)
+@nrp.MapVariable("curr_action",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("reward",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("ResetSimulationSrv",initial_value=None)
 @nrp.MapVariable("conf",initial_value=CONFIGURATION)
@@ -47,7 +47,7 @@ from std_msgs.msg import Float64
 @nrp.MapRobotPublisher('vas_lat_r', Topic('/gazebo_muscle_interface/body/vas_lat_r/cmd_activation',Float64))
 
 @nrp.Neuron2Robot()
-def controller(t, agent, conf, observation, MAX_ITR, reward, reward_, nb_ep, nb_itr, ResetSimulationSrv, bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r):
+def controller(t, agent, conf, observation, curr_action, MAX_ITR, reward, nb_ep, nb_itr, ResetSimulationSrv, bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r):
 	if ResetSimulationSrv.value is None:
 		import rospy
 		from std_srvs.srv import Empty
@@ -64,12 +64,13 @@ def controller(t, agent, conf, observation, MAX_ITR, reward, reward_, nb_ep, nb_
 			muscles_list = [bifemlh_l,bifemlh_r,bifemsh_l,bifemsh_r,glut_max2_l,glut_max2_r,iliacus_l,iliacus_r,lat_gas_l,lat_gas_r,med_gas_l,med_gas_r,rect_fem_l,rect_fem_r,semimem_l,semimem_r,semiten_l,semiten_r,soleus_l,soleus_r,tib_ant_l,tib_ant_r,vas_lat_l,vas_lat_r]
 
 			action = agent.value.forward(np.array(observation.value))
+			curr_action.value = action
 
 			for idx,muscle in enumerate(muscles_list):
 				muscle.send_message(std_msgs.msg.Float64(action[idx]))
 
 			#learn from the raeward
-			reward.value = reward_.value-sum(action)/24
+			#reward.value = reward_.value-sum(action)/24
 			agent.value.backward(reward.value)
 			agent.value.step = agent.value.step + 1
 
@@ -94,5 +95,3 @@ def controller(t, agent, conf, observation, MAX_ITR, reward, reward_, nb_ep, nb_
 			ResetSimulationSrv.value()
 			nb_itr.value = 0
 			nb_ep.value = nb_ep.value + 1
-
-		#t_.value = t

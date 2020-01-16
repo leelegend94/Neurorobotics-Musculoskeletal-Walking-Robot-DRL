@@ -7,7 +7,8 @@ rospy.wait_for_service("/gazebo/get_link_state")
 
 @nrp.MapVariable("conf",initial_value=CONFIGURATION)
 @nrp.MapVariable("observation",initial_value=None,scope=nrp.GLOBAL)
-@nrp.MapVariable("reward_",initial_value=None,scope=nrp.GLOBAL)
+@nrp.MapVariable("reward",initial_value=None,scope=nrp.GLOBAL)
+@nrp.MapVariable("curr_action",initial_value=None,scope=nrp.GLOBAL)
 
 @nrp.MapVariable("pos_x",initial_value=None,scope=nrp.GLOBAL)
 @nrp.MapVariable("pos_z",initial_value=None,scope=nrp.GLOBAL)
@@ -22,7 +23,7 @@ rospy.wait_for_service("/gazebo/get_link_state")
 @nrp.MapVariable("link_mass",initial_value=None)
 
 @nrp.Robot2Neuron()
-def environment(t, conf, observation, reward_, pos_x, pos_z, vel_x, vel_z, link_mass, GetJointPropertiesSrv,GetLinkPropertiesSrv,GetLinkStateSrv):
+def environment(t, conf, observation, reward, curr_action, pos_x, pos_z, vel_x, vel_z, link_mass, GetJointPropertiesSrv,GetLinkPropertiesSrv,GetLinkStateSrv):
 	import rospy
 	import numpy as np
 	joints = ["hip_r","hip_l","knee_r","knee_l","ankle_r","ankle_l"]
@@ -115,10 +116,13 @@ def environment(t, conf, observation, reward_, pos_x, pos_z, vel_x, vel_z, link_
 	for pos in link_pos:
 		observation_ += [pos.x,pos.y,pos.z]
 
-
-	reward = eval(conf.value.get('Environment',{}).get('reward_function',"np.clip(3*link_vlin[0].x-abs(link_vlin[0].y)-1*abs(link_vlin[0].z)+1,-50,50)"))
+	action = curr_action.value
+	if action is None:
+		action = [0]
+	#in the first sveral steps, action is None, but it doesn't matter, reward is only valid after fully initialized.
+	reward_ = eval(conf.value.get('Environment',{}).get('reward_function',"np.clip(3*link_vlin[0].x-abs(link_vlin[0].y)-1*abs(link_vlin[0].z)+1-sum(action)/24,-50,50)"))
 	#clientLogger.info(conf.value.get('Environment',{}).get('reward_function',"default one"))
 	#clientLogger.info(conf.value.get('NAME',"Not specified"))
 	#reward is further rudeced by the sum of muscle activation
-	reward_.value = reward
+	reward.value = reward_
 	observation.value = observation_

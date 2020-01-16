@@ -1,4 +1,7 @@
-@nrp.MapCSVRecorder("recorder", filename="actibelt.csv", headers=["time_stamp","lin_acc_x","lin_acc_y","lin_acc_z","ang_vel_x","ang_vel_y","ang_vel_z","quat_x","quat_y","quat_z","quat_w"])
+CONFIGURATION = {}
+
+NAME = "actibelt_" + CONFIGURATION.get('NAME','default') + ".csv"
+@nrp.MapCSVRecorder("recorder", filename=NAME, headers=["time_stamp","lin_acc_x","lin_acc_y","lin_acc_z","ang_vel_x","ang_vel_y","ang_vel_z","quat_x","quat_y","quat_z","quat_w"])
 
 @nrp.MapVariable("logger", initial_value=None)
 @nrp.MapVariable("sub", initial_value=None)

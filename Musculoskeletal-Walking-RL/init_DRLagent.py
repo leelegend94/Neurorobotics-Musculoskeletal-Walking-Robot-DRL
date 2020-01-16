@@ -70,16 +70,23 @@ def init_DRLagent(t, agent, conf):
         #clientLogger.info(agent_args)
         # instanstiate rl agent
         
-        #agent.value = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process), **agent_args)
-        #memory = SequentialMemory(limit=100000, window_length=1)
-        #random_process = OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=.2, size=nA)
-        #agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=memory, random_process=random_process)
+        #agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process), **agent_args)
+        #agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process),nb_steps_warmup_critic=100, nb_steps_warmup_actor=100, gamma=.99, batch_size=5, target_model_update=1e-3, delta_clip=1.)
 
-        agent_ = DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process),nb_steps_warmup_critic=100, nb_steps_warmup_actor=100, gamma=.99, batch_size=5, target_model_update=1e-3, delta_clip=1.)
+        #tf doesn't support the usage of **kwargs, let's do it in a noob way.
+        additional_args = ""
+        for key,value in agent_args.items():
+            additional_args = additional_args+", "+key+"="+str(value)
+        agent_ = eval("DDPGAgent(nb_actions=nA, actor=actor, critic=critic, critic_action_input=action_input, memory=eval(memory), random_process=eval(random_process)" + additional_args + ")")
 
         agent_.training = True
 
-        agent_.compile(optimizer=eval(optimizer),metrics=['mae'])
+        #agent_.compile(optimizer=eval(optimizer),metrics=['mae'])
+        additional_args = ""
+        for key,value in compiler_args.items():
+            additional_args = additional_args+", "+key+"="+str(value)
+        optimizer=eval(optimizer)
+        eval("agent_.compile(optimizer=optimizer"+additional_args+")")
         
         #Why this strange path? --> cf. "https://github.com/keras-rl/keras-rl/blob/master/rl/agents/ddpg.py" line 158-171
         WeightsPATH = conf.value.get('DDPG_Agent',{}).get('weights_sav_path',"~/.opt/weights")
@@ -106,8 +113,6 @@ def init_DRLagent(t, agent, conf):
 
         if len(idx_ts_actor)==0:
             clientLogger.info(actor_name+' not availiable. Freash training.')
-            #time_stamp = conf.value.get('START_TIME_STAMP','20xx-yy-dd-hh-mm-ss')
-            #full_name = time_stamp+"_"+name
         elif len(idx_ts_actor)==1:
             full_name = weights_list_timestamp[idx_ts_actor]+"_"+name
             agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
@@ -121,7 +126,6 @@ def init_DRLagent(t, agent, conf):
             agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
             clientLogger.info("Weights file: ",full_name," loaded!")
 
-        #tmp.value = full_name
 
         agent.value = agent_
         clientLogger.info('***********************')

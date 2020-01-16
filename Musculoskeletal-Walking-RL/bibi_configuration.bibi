@@ -3,8 +3,8 @@
   xmlns="http://schemas.humanbrainproject.eu/SP10/2014/BIBI" xsi:schemaLocation="http://schemas.humanbrainproject.eu/SP10/2014/BIBI ../bibi_configuration.xsd">
   <bodyModel robotId="body">body/body.sdf</bodyModel>
   <transferFunction src="history_recorder.py" active="true" xsi:type="PythonTransferFunction" />
-  <transferFunction src="init_DRLagent.py" active="true" xsi:type="PythonTransferFunction" />
   <transferFunction src="actibelt_recorder.py" active="true" xsi:type="PythonTransferFunction" />
   <transferFunction src="environment.py" active="true" xsi:type="PythonTransferFunction" />
+  <transferFunction src="init_DRLagent.py" active="true" xsi:type="PythonTransferFunction" />
   <transferFunction src="controller.py" active="true" xsi:type="PythonTransferFunction" />
 </bibi>
