@@ -52,7 +52,7 @@ def sim_start(experiment,server,config_file_path):
 	MAX_EP = config.get('Training',{}).get('Max_Epoch',300)
 	sim.start()
 	time.sleep(5)
-	#wait until that csv file is created.
+	#wait until the csv file is created.
 	ep_idx = 0
 	hist_file_name = "history_" + config.get('NAME','default') + ".csv"
 	while(ep_idx <= MAX_EP):

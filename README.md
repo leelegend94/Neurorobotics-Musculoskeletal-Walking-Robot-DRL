@@ -2,18 +2,18 @@
 
 Train a musculoskeletal robot to walk on HBP Neurorobotics Platform using Deep Reinforcement Learning.
 
-##Prerequisites
+## Prerequisites
 
-0. Only works on Ubuntu 18.04
+### 0. Only works on Ubuntu 18.04
 
-1. If gpu support is required, firstly install Nvidia drivers, CUDA, CuDNN.
+### 1. If gpu support is required, firstly install Nvidia drivers, CUDA, CuDNN.
 
-# Install NVIDIA driver
+#### Install NVIDIA driver
 sudo ubuntu-drivers autoinstall
 
  Please follow the steps described here: " https://www.tensorflow.org/install/gpu "  section Linux setup. TensorRT is not required. USE DEFAULT SETTINGS. SKIP NVIDIA DRIVER PART!! DON'T install tensorflow now!
 
-# Add NVIDIA package repositories
+#### Add NVIDIA package repositories
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
 sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
@@ -22,18 +22,18 @@ wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1
 sudo apt install ./nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
 sudo apt-get update
 
-# Install NVIDIA driver
+#### Install NVIDIA driver
 sudo apt-get install --no-install-recommends nvidia-driver-418
-# Reboot. Check that GPUs are visible using the command: nvidia-smi
+##### Reboot. Check that GPUs are visible using the command: nvidia-smi
 
-# Install development and runtime libraries (~4GB)
+##### Install development and runtime libraries (~4GB)
 sudo apt-get install --no-install-recommends \
     cuda-10-0 \
     libcudnn7=7.6.2.24-1+cuda10.0  \
     libcudnn7-dev=7.6.2.24-1+cuda10.0
 
 
-2. Install tensorflow(-gpu)
+### 2. Install tensorflow(-gpu)
 -->Ensure you have Python 2.7 pip, dev, and virtualenv libraries installed.
 $ sudo apt-get install python-pip python-dev python-virtualenv
 
@@ -53,7 +53,7 @@ eg. uninstall protobuf in tensorflow_venv:
 $ source ~/.opt/tensorflow_venv/bin/activate
 $ pip uninstall protobuf
 
-3. Install other packages
+### 3. Install other packages
 -->install protobuf 3.6.1 ONLY inside the tensorflow_venv
 $ source ~/.opt/tensorflow_venv/bin/activate
 $ pip install protobuf==3.6.1

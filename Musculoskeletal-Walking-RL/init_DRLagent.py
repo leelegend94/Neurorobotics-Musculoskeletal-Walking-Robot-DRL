@@ -24,10 +24,10 @@ def init_DRLagent(t, agent, conf):
         from keras import backend as K
         K.clear_session()
 
-        actor_layers = conf.value.get('DDPG_Agent',{}).get('ActorNet',{}).get('hidden_layers',[[128,'relu'],[128,'relu'],[128,'relu']])
+        actor_layers = conf.value.get('DDPG_Agent',{}).get('ActorNet',{}).get('hidden_layers',[[128,'relu'],[128,'relu']])
         actor_act = conf.value.get('DDPG_Agent',{}).get('ActorNet',{}).get('output_activation','sigmoid')
 
-        critic_layers = conf.value.get('DDPG_Agent',{}).get('CriticNet',{}).get('hidden_layers',[[512,'relu'],[256,'relu'],[128,'relu']])
+        critic_layers = conf.value.get('DDPG_Agent',{}).get('CriticNet',{}).get('hidden_layers',[[256,'relu'],[128,'relu']])
         critic_act = conf.value.get('DDPG_Agent',{}).get('CriticNet',{}).get('output_activation','linear')
 
         memory = conf.value.get('DDPG_Agent',{}).get('memory',"SequentialMemory(limit=100000, window_length=1)")

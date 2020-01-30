@@ -121,6 +121,7 @@ def environment(t, conf, observation, reward, curr_action, pos_x, pos_z, vel_x, 
 		action = [0]
 	#in the first sveral steps, action is None, but it doesn't matter, reward is only valid after fully initialized.
 	reward_ = eval(conf.value.get('Environment',{}).get('reward_function',"np.clip(3*link_vlin[0].x-abs(link_vlin[0].y)-1*abs(link_vlin[0].z)+1-sum(action)/24,-50,50)"))
+	clientLogger.info("energy: ",sum(action)/24)
 	#clientLogger.info(conf.value.get('Environment',{}).get('reward_function',"default one"))
 	#clientLogger.info(conf.value.get('NAME',"Not specified"))
 	#reward is further rudeced by the sum of muscle activation

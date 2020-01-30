@@ -555,7 +555,7 @@
 			<parent>world</parent>
 			<child>pelvis</child>
 			<axis> 
-				<xyz>1 0 1</xyz>
+				<xyz>1 0 0</xyz>
 			</axis>
 		</joint>
 
