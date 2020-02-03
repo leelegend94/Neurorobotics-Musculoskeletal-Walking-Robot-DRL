@@ -36,7 +36,7 @@ DDPG_Agent:
         - relu 
     output_activation: linear
 
-  random_process: OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=1, size=nA) #size=nA should not be changed
+  random_process: OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=0.5, size=nA) #size=nA should not be changed
 
   memory: SequentialMemory(limit=100000, window_length=1)
 

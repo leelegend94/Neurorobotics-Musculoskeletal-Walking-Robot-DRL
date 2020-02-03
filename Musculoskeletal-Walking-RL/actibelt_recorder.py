@@ -23,4 +23,4 @@ def actibelt_recorder(t, recorder, logger, reward, sub):
 		if result is not None:
 			[ts,ax,ay,az,wx,wy,wz,qx,qy,qz,qw] = result
 			recorder.record_entry(ts,ax,ay,az,wx,wy,wz,qx,qy,qz,qw)
-			clientLogger.info('acti data Recorded')
+			#clientLogger.info('acti data Recorded')

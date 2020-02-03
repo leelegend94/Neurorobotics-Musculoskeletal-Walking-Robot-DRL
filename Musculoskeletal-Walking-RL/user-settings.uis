@@ -48,7 +48,7 @@
           "isClosable": true,
           "reorderEnabled": true,
           "title": "",
-          "height": 46.153846153846146,
+          "height": 46.15384615384615,
           "width": 47.058823529411775,
           "content": [
             {
@@ -58,7 +58,7 @@
               "title": "",
               "activeItemIndex": 0,
               "width": 100,
-              "height": 69.741387557872,
+              "height": 64.6927374301676,
               "content": [
                 {
                   "type": "component",
@@ -84,7 +84,7 @@
               "reorderEnabled": true,
               "title": "",
               "activeItemIndex": 0,
-              "height": 30.258612442128,
+              "height": 35.307262569832396,
               "content": [
                 {
                   "type": "component",

@@ -3,9 +3,9 @@ CONFIGURATION = {}
 # internal keras-rl agent to persist
 @nrp.MapVariable("agent", initial_value=None, scope=nrp.GLOBAL)
 @nrp.MapVariable("conf",initial_value=CONFIGURATION)
-#@nrp.MapVariable("tmp",initial_value=None)
+@nrp.MapVariable("tmp",initial_value=None)
 @nrp.Robot2Neuron()
-def init_DRLagent(t, agent, conf):
+def init_DRLagent(t, agent, conf, tmp):
     # initialize the keras-rl agent
     #clientLogger.info(tmp.value)
     if agent.value is None:
@@ -98,9 +98,9 @@ def init_DRLagent(t, agent, conf):
         weights_list = os.listdir(os.path.expanduser(WeightsPATH))
 
         #ensure weights in the list contain timestamp, only works before 2100 :)
-        weights_list = list(filter(lambda x: x.endswith('h5') and x.startswith("20"), weights_list))
-        weights_list_without_timestamp = [x[17:] for x in weights_list]
-        weights_list_timestamp = [x[:16] for x in weights_list]
+        weights_list = list(filter(lambda x: x.endswith('h5') and x.startswith("20") and not x.startswith("20xx"), weights_list))
+        weights_list_without_timestamp = [x[20:] for x in weights_list]
+        weights_list_timestamp = [x[:19] for x in weights_list]
 
         actor_name = conf_name+"_ddpg_weights_actor.h5"
         #critic_name = conf_name+"_ddpg_weights_critic.h5"
@@ -113,23 +113,26 @@ def init_DRLagent(t, agent, conf):
 
         if len(idx_ts_actor)==0:
             clientLogger.info(actor_name+' not availiable. Freash training.')
+            tmp.value = "No weights loaded!"
         elif len(idx_ts_actor)==1:
-            full_name = weights_list_timestamp[idx_ts_actor]+"_"+name
+            full_name = weights_list_timestamp[idx_ts_actor[0]]+"_"+name
             agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
             clientLogger.info("Weights file: ",full_name," loaded!")
+            tmp.value = "single, "+full_name
         else:
             clientLogger.info("Multiple weights file matched, choose the latest one.")
             import time, datetime
+            weights_list_timestamp = [weights_list_timestamp[i] for i in idx_ts_actor]
             timestamp = [time.mktime(datetime.datetime.strptime(x, "%Y-%m-%d-%H-%M-%S").timetuple()) for x in weights_list_timestamp]
             idx_ts_actor = timestamp.index(max(timestamp))
             full_name = weights_list_timestamp[idx_ts_actor]+"_"+name
             agent_.load_weights(os.path.expanduser(WeightsPATH+"/"+full_name))
             clientLogger.info("Weights file: ",full_name," loaded!")
+            tmp.value = "mult, "+full_name
 
 
         agent.value = agent_
         clientLogger.info('***********************')
         clientLogger.info('DDPG agent ready!')
         clientLogger.info('***********************')
-
-        
+    #clientLogger.info(tmp.value)   

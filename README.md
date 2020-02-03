@@ -62,3 +62,17 @@ $ pip install protobuf==3.6.1
 $ source ~/.opt/tensorflow_venv/bin/activate
 $ pip install keras
 $ pip install keras-rl
+
+## Configuration
+create/fix symlinks:
+/Models/body/body.sdf --> /Musculoskeletal-Walking-RL/body/body.sdf
+/Models/empty_world_precise/empty_world_precise.sdf --> /Musculoskeletal-Walking-RL/empty_world_precise.sdf
+/Models/body --> $HBP/Models/body
+/Models/empty_world_precise --> $HBP/Models/empty_world_precise
+
+## Training
+1. setup your configuration files in /Musculoskeletal-Walking-RL/simulation_config
+
+2. in VC_coach:
+$ python train.py
+use --help for more info
